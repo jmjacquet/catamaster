@@ -1,0 +1,64 @@
+    /*a.list-group-item.active*/
+    
+    .form-signin input[type="text"] {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+
+    }
+    .form-signin input[type="password"] {        
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-group .input-group{
+        margin:5px;
+        width:100%;
+    }
+    .form-group .input-group-addon{     
+        /*font-size: 16px;       */
+    }
+     
+    .form-signin .form-control {
+        position: relative;
+        font-size: 14px;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        height: 30px;
+        padding: 10px;
+
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .vertical-offset-100 {
+        padding-top: 3em;
+    }
+    .img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+    }
+    .panel {
+    margin-bottom: 20px;
+    background:rgb(0,0,0);
+    background:rgba(0,0,0,.5);
+    *background:transparent;
+    *filter:progid:DXImageTransform.Microsoft.gradient(startColorStr=#6F000000,endColorStr=#6F000000);
+    *-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#6F000000,endColorstr=#6F000000)";
+    border: none;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    text-align: center;
+    }
+ .apollo-image {
+  -webkit-box-shadow: inset 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 200px;
+  margin: 0 auto 20px auto;
+  width: 250px;
+  height: 250px;
+  display: block;
+  background: url(/img/avatar.png) top center;
+}
+
+/* http://update.tidy.eideus.com/ */

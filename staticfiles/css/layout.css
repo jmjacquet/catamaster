@@ -1,0 +1,223 @@
+html,body{
+  height:100%;
+  width:100%; 
+  color: white;
+  /*background-color:black;*/
+  background-image: url('../images/back.jpg');
+  background-attachment: fixed;
+  font-size: 12px;
+
+}
+
+.barraIzq, .barraDer{
+ background: none;
+ height: 100%;
+ padding-right: 10px;
+ padding-left: 30px;
+}
+.container-full {
+  width: 100%;
+  /*margin-right: 10px;*/
+
+}
+.contenedor {
+ padding-left: 20px;
+ padding-right: 40px;
+width: 80%;
+}
+.centro {
+ margin-left: 20px;
+ margin-right: 20px;
+}
+
+.principal {
+  overflow: scroll;
+  overflow-x: hidden;
+
+  height : 750px;
+}
+.center {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+
+.img-propagandas {
+    display: inline-block;
+    width: 80%;
+    max-height: 150px;
+    min-height: 100px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    border-width: 2px;
+    border-radius: 8px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+  
+    -webkit-box-shadow: 0 0 5px 5px #E6E6E6;
+    -moz-box-shadow: 0 0 5px 5px #E6E6E6;
+    box-shadow: 0 0 5px 5px #E6E6E6;
+}
+
+.img-propagandas:hover {
+    -webkit-transition: -webkit-filter 1s;
+    -webkit-filter: grayscale(1);  /* Chrome */
+    filter: url(filters.svg#grayscale); /* Firefox 3.5+ */
+    filter: gray; /* IE6-9 */
+}
+
+
+
+.navbar-inverse {   
+    border-radius: 0px; 
+    margin-bottom: 0px;
+}
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+.navbar-brand
+{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    line-height:12px;
+    padding-top:30px;
+    padding-bottom:15px;
+    font-family:  'Catamaran',"Trebuchet MS", Arial, Helvetica, sans-serif !important;font-size:25px;display:inline-block;
+    color:white;
+    font-weight: bold;
+    font-variant: small-caps;
+}
+
+.navbar-brand2
+{   
+    
+    text-align: center;
+    
+    height: 50px;
+    margin-left: 20px;  
+    margin-top: 8px;
+    margin-bottom: 10px;  
+    
+    /*padding-bottom:15px;*/
+    font-family:  'Averia Sans Libre', Arial, Helvetica, sans-serif !important;font-size:35px;display:inline-block;
+    color:white;
+    font-weight: bolder;
+    font-variant: small-caps;
+    font-style: italic;
+}
+
+.tituloResultados
+{    
+    padding-top:10px;
+    padding-bottom:10px;
+    font-family:  'Catamaran',"Trebuchet MS", Arial, Helvetica, sans-serif !important;font-size:20px;display:inline-block;
+    color:white;
+    font-weight: bold;
+   
+}
+
+.navbar {
+    position: relative;
+    color:white;
+    background: none;
+    
+    margin-bottom: 0px;
+    padding-right: 15px;
+    border: 0px;
+    font-family:  'Catamaran',"Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+.navbar .dropdown-menu {
+    
+    color:white;
+    background: rgba(0, 0, 0, 0.18);
+    -moz-border-radius-topleft: 8px;
+    -moz-border-radius-topright: 8px;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding-top: 0;
+}
+
+.navbar-brand small {
+  display:block;
+  font-size:15px;
+  padding-top:20px;
+  padding-bottom:5px;
+  font-variant: small-caps;
+
+}
+.nav.navbar-nav > li > a , .nav.navbar-nav > .open > a
+{
+  background: transparent;
+  color:white;
+}
+
+.nav.navbar-nav > li > a:hover,
+.nav.navbar-nav > li > a:focus{
+text-shadow:rgba(255,255,255,.5) 0 0 15px, rgba(255,255,255,.5) 0 0 15px;
+}
+
+/*.nav.navbar-nav > li > a:hover {
+  font-weight: bolder;
+  font-size:16px;
+  background-color: transparent;
+}*/
+
+
+
+.nav.navbar-nav a {
+    padding-top:25px;
+    padding-bottom:30px;
+  
+  }
+
+.panel-body{
+  color:black;
+   overflow: scroll;
+  overflow-x: hidden;
+}
+
+.panel-title{
+  font-family:  'Catamaran',"Trebuchet MS", Arial, Helvetica, sans-serif !important;font-size:15px;
+font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+.logo {
+  width: 60px;
+  height: 30px;
+  margin-left: 35px;  
+  
+  margin-bottom: 15px;  
+ 
+ 
+}
+
+.panel_transparente{
+  position: absolute;
+  top: 0px;
+  width: 88%; 
+  padding: 18px 6% 60px 6%;
+  margin: 20px;
+  font-size: 15px;
+    background: #2d2d2d;
+    background: rgba(0, 0, 0, 0.18);
+    -moz-border-radius-topleft: 8px;
+    -moz-border-radius-topright: 8px;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}

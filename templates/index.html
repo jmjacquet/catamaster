@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% block principal %}	
+	 <div id="banner">
+      <section id="promo" class="promo section offset-header">
+        <div class="container">
+            <div class="row">
+                <div class="overview col-md-5 col-sm-5 col-xs-12">
+                    <div id="Carousel" class="carousel slide" data-ride="carousel">
+                        <!-- Carousel indicators -->
+                        
+                        <!-- Wrapper for carousel items -->
+                        <div class="carousel-inner">                            
+                            <div class="item active">
+                                <img class="examenes" src="{% static 'images/fotos/examen2.png' %}" alt="Second Slide">
+                            </div>
+                            <div class="item">
+                                <img class="examenes" src="{% static 'images/fotos/examen3.png' %}" alt="Third Slide">
+                            </div>
+                            <div class="item">
+                                <img class="examenes" src="{% static 'images/fotos/examen4.png' %}" alt="Third Slide">
+                            </div>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+                <div class="overview col-md-7 col-sm-7 col-xs-12">
+                    <div class="promo-texto">
+                    <strong>CATAMASTER</strong> es una herramienta gratuita que ayuda a Médicos Oftalmólogos en formación, ya recibidos o expertos a evaluar de forma precisa, ordenada y sistematizada a los pacientes que van a ser operados de catarata. De esta manera se pueden evitar o minimizar las complicaciones.
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+              <div class="overview col-md-12 col-sm-12 col-xs-12">
+                <div class="titulo_utilidades">Con CATAMASTER podrá:</div>      
+                <ul class="summary">
+
+                   <li><div class="icono"><img src="{% static 'images/iconos/examen2.png' %}"> </div><b>Evaluar a sus pacientes de forma ordenada y precisa:</b> esto se ve facilitado por el acceso simple a la información brindada por CATAMASTER.</li>
+                    <li><div class="icono"><img src="{% static 'images/iconos/ojo-examen.png' %}"></div><b>Evitar o disminuir el riesgo de complicaciones quirúrgicas:</b> el software sugiere decisiones a tomar en el pre, intra y postoperatorio, siguiendo los lineamientos de la medicina basada en la evidencia y de expertos internacionales. </li>
+                    <li><div class="icono"><img src="{% static 'images/iconos/examen.png' %}"></div><b>Llevar un registro personalizado:</b> esto es posible gracias a los datos de los pacientes según medicina basada en la evidencia.</li>
+                </ul>                
+              </div>               
+            </div>
+               
+        </div><!--//container-->
+    </section><!--//promo-->
+    </div>
+    <!-- ******HISTORIA****** --> 
+    <section id="historia" class="faq section text-center">
+        <div class="container">
+          <div class="row">
+            <h2 class="text-center section-heading2">El Corazón...</h2>            
+            <div class="col-md-4 col-sm-4 col-xs-12">  
+                <img class="examenes" src="{% static 'images/fotos/examen1.png' %}" alt="First Slide">
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12">                              
+                        <p class="historia-texto ">La idea de realizar una planilla (checklist) preoperatoria (Registro derecho de autor: D.N.D.A. Formulario nº 197586; Expediente 877911) me acompañó desde muy temprano en mi formación como Oftalmólogo.<br> En el 2007, durante mi segundo año de residencia y ante la gran cantidad de datos preoperatorios consideré necesario recabarlos de forma ordenada para lograr un abordaje quirúrgico completo. Esta motivación me condujo a estudiar e interiorizarme en todos los aspectos de la evaluación pre, intra y postoperatoria. Así surgió el corazón de este software que es la <b>tabla preoperatoria de cirugía de catarata</b>. La misma fue presentada por primera vez en el año 2010 en el Congreso ALACCSA-R en mi querida Argentina. Luego fue publicada en varias revistas y ponencias nacionales como internacionales. </p>
+                 
+            </div>
+          </div>
+        </div>
+    </section>
+    <section class="faq section text-center">
+        <div class="container">
+          <div class="row">
+            <h2 class="text-center section-heading2">Publicaciones & Congresos</h2>            
+                {% include "fotos.html"%}        
+          </div>
+        </div>
+    </section>
+
+    
+    
+    <!-- ******STORY****** --> 
+    <div id="banner2">
+    <section id="story" class="story section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center">                   
+                    <div class="row">
+                        <div class="team-1-member col-sm-6 col-md-6 col-xs-12">
+                            <img  class="img-circle" alt="Team Member" src="{% static 'images/team/ivan.jpg' %}">
+                            <h2>Dr. Ivan Cimino</h2>
+                            <h5>Médico Oftalmólogo</h5>
+                            <p class="space-top-small">
+                                Especialista en catarata, córnea y cirugía refractiva.<br>
+                                Master en Oftalmología.<br>
+                                Creador de la Tabla de Evaluación preoperatoria para cirugía de catarata.
+                            </p>
+                        </div>
+                        <div  class="team-1-member col-md-6 col-sm-6 col-xs-12 text-center">
+                            <img  class="img-circle" alt="Team Member" src="{% static 'images/team/juanma.jpg' %}">
+                            <h2>Juan Manuel Jacquet</h2>
+                            <h5>Ingeniero en Sistemas de Información.</h5>
+                            <p class="space-top-small">                                
+                                Especialista con mas de 10 años de experiencia en Desarrollo de Sistemas.<br>
+                                WebDeveloper y entusiasta de las nuevas tecnologías.<br>
+                            </p>
+                        </div>
+                            
+                    </div>
+                </div><!--//team-->
+            </div><!--//row-->
+        </div><!--//container-->
+    </section><!--//story-->
+    </div>
+    
+    <!-- ******TESTIMONIALS****** --> 
+    <section id="testimonials" class="testimonials section">
+        <div class="container">
+            <div class="row">
+                <div class="item col-md-4 col-sm-4 col-xs-12">
+                    <div class="quote-box">
+                        <i class="fa fa-quote-left"></i>
+                        <blockquote class="quote">
+                            Para el resultado exitoso que estamos buscando después de una cirugía de catarata, es imprescindible hacer una evaluación pre-operatoria completa, entre más específica sea esta, menor será el riesgo de presentar complicaciones tanto intra cómo post-quirúrgicas. La aplicación <b>CATAMASTER</b> no solamente incluye una evaluación preoperatoria detallada sino que al estar disponible en-línea podemos acceder a ella en cualquier momento.
+Sin olvidar ningún detalle, está herramienta nos permite mejorar día a día nuestros resultados postoperatorios. 
+                        </blockquote><!--//quote-->
+                    </div><!--//quote-box-->
+                    <div class="people row">
+                        <img class="img-rounded user-pic col-md-5 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" src="{% static 'images/people/people2.png' %}" alt="" />
+                        <p class="details text-center pull-left">
+                            <span class="name">Mauricio Rodiguez Díaz</span>
+                            <span class="title">México</span>
+                        </p>                        
+                    </div><!--//people-->
+                </div><!--//item-->
+                <div class="item col-md-4 col-sm-4 col-xs-12">
+                    <div class="quote-box">
+                        <i class="fa fa-quote-left"></i>
+                        <blockquote class="quote">
+                            Es una herramienta que todo oftalmólogo que se inicia en el apasionante mundo de la cirugía actual del cristalino debería usar y considerar como indispensable. Muy actual y didáctica.
+                        </blockquote><!--//quote-->
+                    </div><!--//quote-box-->
+                    <div class="people row">
+                        <img class="img-rounded user-pic col-md-5 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" src="{% static 'images/people/people1.png' %}" alt="" />
+                        <p class="details text-center pull-left">
+                            <span class="name">Luis Zunino</span>
+                            <span class="title">Argentina</span>
+                        </p>                        
+                    </div><!--//people-->
+                </div><!--//item-->
+                
+                <div class="item col-md-4 col-sm-4 col-xs-12">
+                    <div class="quote-box">
+                        <i class="fa fa-quote-left"></i>
+                        <blockquote class="quote">
+                            El programar una cirugía y tratar de prever imprevistos, es un paso esencial para lograr el éxito posterior. Un sistema informático como el que nos ofrece "CataMaster" podrá resultar de gran utilidad no sólo para quienes se inician, sino también a los más avanzados y experimentados cirujanos de cataratas, ya que permite gestionar información, no sólo de utilidad en el pre quirúrgico, sino también para su análisis posterior, como por ejemplo, para realizar revisión de resultados/estudios retrospectivos. 
+                        </blockquote><!--//quote-->
+                    </div><!--//quote-box-->
+                    <div class="people row">
+                        <img class="img-rounded user-pic col-md-5 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" src="{% static 'images/people/people3.png' %}" alt="" />
+                        <p class="details text-center pull-left">
+                            <span class="name">Rodrigo M. Torres</span>
+                            <span class="title">Argentina</span>
+                        </p>                        
+                    </div><!--//people-->
+                </div><!--//item-->                
+            </div><!--//row-->
+           <!-- <div class="press row text-center">
+                <h3 class="note">Empresas que nos acompañan...</h3>
+                <ul class="col-md-12 list-inline">
+                    <li><a href="#"><img class="img-responsive" src="{% static 'images/images1.jpg' %}" alt="" /></a></li>
+                    <li><a href="#"><img class="img-responsive" src="{% static 'images/images2.jpg' %}" alt="" /></a></li>
+                    <li><a href="#"><img class="img-responsive" src="{% static 'images/images3.jpg' %}" alt="" /></a></li>                    
+                    <li class="last"><a href="#"><img class="img-responsive" src="{% static 'images/images4.jpg' %}" alt="" /></a></li>
+                </ul>
+            </div>-->
+            <!--//row-->
+        </div><!--//container-->
+    </section><!--//Testimonials-->
+    
+    <!-- ******Login****** --> 
+    
+    <!-- ******CONTACT****** --> 
+    <section id="contact" class="contact section has-pattern">
+        <div class="container">
+            <div class="row text-center">
+                <h2 class="title section-heading">Contáctenos</h2>
+                <div class="intro col-md-6 col-sm-12 col-xs-12 col-md-offset-3">
+                    <p>Nos gustaría conocer sus dudas e inquietudes. Puede contactarnos por estos medios o simplemente enviarnos un mensaje.</p>
+                    <ul class="list-unstyled contact-details">
+                        <li><i class="fa fa-envelope"></i><a href="mailto:ivancimino@me.com">ivancimino(at)webfactional.com</a></li>
+                        <li><i class="fa fa-phone-square"></i>(+54) 9 (0342) 155124601</li>
+                        <li><i class="fa fa-phone-square"></i>(+54) 9 (0342) 4600939</li>
+                    </ul>
+                </div>
+            </div><!--//row-->           
+            <div class="text-center">
+                 <ul class="social-icons list-inline">
+                    <li><a href="https://twitter.com/cuida_tus_ojos" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/ivan.cimino" target="_blank" ><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://ivancimino.com" target="_blank"><i class="fa fa-globe"></i></a></li>
+                </ul><!--//social-icons-->
+            </div><!--//row-->
+        </div><!--//container-->
+    </section><!--//contact-->  
+      
+    <!-- ******FOOTER****** --> 
+    <footer class="footer">
+        <div class="container">
+            <small class="copyright pull-left">Copyright &copy; 2017</small> <small class="copyright pull-right">Registro derecho de autor: D.N.D.A. Formulario nº 197586 / Expediente 877911</small>
+        </div>
+    </footer><!--//footer-->
+
+  
+    
+
+{% endblock principal %}
+
+
+		     
+                <!--
+                <div id="video-container" class="video-container col-md-12 col-sm-12 col-xs-12 text-center">
+                
+                    <iframe src="http://player.vimeo.com/video/87044590" width="570" height="320" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                </div>
+                -->
+                                    

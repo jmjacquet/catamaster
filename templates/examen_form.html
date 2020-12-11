@@ -1,0 +1,677 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% load crispy_forms_tags %}
+
+{% block principal %}
+<section class="fondo section has-pattern">
+        <div class="container cont_examen">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12"> 
+                  {% if form.errors or sub_form.errors %}
+                         {% if messages %}
+                              {% for message in messages %}
+                                  <div class="alert alert-danger alert-dismissible" role="alert">
+                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  
+                                  <ul>
+                                    {% for field2 in sub_form %}
+                                      {% if field2.errors %}
+                                        {% for error2 in field2.errors %}
+                                          <li><b>{{field2.label}}</b>: {{ error2|escape }}</li>
+                                        {% endfor %}
+                                      {% endif %}
+                                    {% endfor %}
+
+                                    {% for field in form %}
+                                      {% if field.errors %}
+                                        {% for error in field.errors %}
+                                          <li><b>{{field.label}}</b>: {{ error|escape }}</li>
+                                        {% endfor %}
+                                      {% endif %}
+                                    {% endfor %}
+                                    
+                                  </ul>
+
+
+                                  </div>
+                              {% endfor %}
+                         {% endif %}
+                        {% endif %}                    
+                    <form method="POST" class="form-horizontal"  id="examen">
+                    {% csrf_token %}
+                     <div class="row"> 
+                      	<div class="col-md-12">
+                        	<div class="col-xs-12"> 
+                          <fieldset>
+                      		<legend>Información del Paciente</legend>
+                            <div class="col-xs-12 col-md-8">
+                              <div class="form-group {%if sub_form.nombre.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-3 control-label">{{sub_form.nombre.label}}</div>
+                                 <div class="col-sm-8">{% bootstrap_field sub_form.nombre show_label=False %}</div>
+                              </div>
+                              <div class="form-group {%if sub_form.direccion.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-3 control-label">{{sub_form.direccion.label}}</div>
+                                 <div class="col-sm-8">{% bootstrap_field sub_form.direccion show_label=False %} </div>
+                              </div>
+                              <div class="form-group {%if sub_form.telefonos.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-3 control-label">{{sub_form.telefonos.label}}</div>
+                                 <div class="col-sm-8">{% bootstrap_field sub_form.telefonos show_label=False %} </div>
+                              </div>
+                              <div class="form-group {%if sub_form.os.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-3 control-label">{{sub_form.os.label}}</div>
+                                 <div class="col-sm-8">{% bootstrap_field sub_form.os show_label=False %} </div>
+                              </div>
+                            </div>
+                             <div class="col-xs-12 col-md-4">
+                              <div class="form-group {%if sub_form.sexo.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-3 control-label">{{sub_form.sexo.label}}</div>
+                                 <div class="col-sm-8">{% bootstrap_field sub_form.sexo show_label=False %}</div>
+                              </div>
+                              <div class="form-group {%if sub_form.edad.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-3 control-label">{{sub_form.edad.label}}</div>
+                                 <div class="col-sm-8">{% bootstrap_field sub_form.edad show_label=False %}</div>
+                              </div>
+                              <div class="form-group {%if sub_form.nrodocu.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-3 control-label">{{sub_form.nrodocu.label}}</div>
+                                 <div class="col-sm-8">{% bootstrap_field sub_form.nrodocu show_label=False %} {{sub_form.nrodocu.errors}}</div>
+                              </div>
+                              <div class="form-group {%if form.ojo.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-3 control-label">{{form.ojo.label}}</div>
+                                 <div class="col-sm-8">{% bootstrap_field form.ojo show_label=False %}</div>
+                              </div>
+                            </div>
+                      		</fieldset>
+                        </div>
+                        </div>
+                         
+                      </div>
+                      <div class="row"> 
+                      <hr>
+                        <div class="col-md-12">                                                    
+                            <div class="col-xs-12 col-md-3">
+                            <fieldset>
+                            <legend>Historia Médica</legend>
+                              <div class="form-group {%if sub_form.HM_EC.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-12">{% bootstrap_field sub_form.HM_EC show_label=False %} {{sub_form.HM_EC.errors}}</div>
+                              </div>
+                              <div class="form-group {%if sub_form.HM_HTA.errors %}has-error{%endif%} form-group-sm">                                 
+                                 <div class="col-sm-12">{% bootstrap_field sub_form.HM_HTA show_label=False %} {{sub_form.HM_HTA.errors}}</div>
+                              </div>
+                              <div class="form-group {%if sub_form.HM_DBT.errors %}has-error{%endif%} form-group-sm">                                 
+                                 <div class="col-sm-12">{% bootstrap_field sub_form.HM_DBT show_label=False %} {{sub_form.HM_DBT.errors}}</div>
+                              </div>
+                              <div class="form-group {%if sub_form.HM_ET.errors %}has-error{%endif%} form-group-sm">                                         
+                                 <div class="col-sm-12">{% bootstrap_field sub_form.HM_ET show_label=False %} {{sub_form.HM_ET.errors}}</div>
+                              </div>
+                              <div class="form-group {%if sub_form.HM_EPOC.errors %}has-error{%endif%} form-group-sm">                                         
+                                 <div class="col-sm-12">{% bootstrap_field sub_form.HM_EPOC show_label=False %} {{sub_form.HM_EPOC.errors}}</div>
+                              </div>
+                          </fieldset>
+                          </div>        
+                       
+                       
+                          <div class="col-xs-12 col-md-3">
+                          <fieldset>                            
+                             <legend>Medicaciones</legend>
+                              <div class="form-group {%if sub_form.MEDICAC_AAS.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-12">{% bootstrap_field sub_form.MEDICAC_AAS show_label=False %} {{sub_form.MEDICAC_AAS.errors}}</div>
+                              </div>
+                              <div class="form-group {%if sub_form.MEDICAC_ACOAG.errors %}has-error{%endif%} form-group-sm">                                 
+                                 <div class="col-sm-12">{% bootstrap_field sub_form.MEDICAC_ACOAG show_label=False %} {{sub_form.MEDICAC_ACOAG.errors}}</div>
+                              </div>
+                              <div class="form-group {%if sub_form.MEDICAC_ABLOQ.errors %}has-error{%endif%} form-group-sm ">
+                                 <div class="col-sm-12">
+                                 <div class="form-group">
+                                  <div class="checkbox">
+                                     <label for="id_MEDICAC_ABLOQ">{{sub_form.MEDICAC_ABLOQ}} Antiprostáticos</label>
+                                    <span data-toggle="tooltip" data-placement="top" title="¡Cuidado! El paciente toma antiprostáticos, peligro del Sindorme de Iris Floppy (IFIS)" class="badge badge-error">!</span>
+                                  </div>
+                                 </div>
+
+                                 {{sub_form.MEDICAC_ABLOQ.errors}} 
+                                 </div>
+                              </div>
+                              <div class="form-group {%if sub_form.TOMA_AAS_ACOAG.errors %}has-error{%endif%} form-group-sm">                                         
+                                 <div class="col-sm-12">{% bootstrap_field sub_form.TOMA_AAS_ACOAG show_label=False %} {{sub_form.TOMA_AAS_ACOAG.errors}}</div>
+                              </div>
+                          </fieldset>       
+                          </div> 
+                       
+                      
+                          <div class="col-xs-12 col-md-3">
+                          <fieldset> 
+                          <legend>Ocupación/Hobbies</legend>
+                             <div class="form-group {%if sub_form.OC_LF_LPF.errors %}has-error{%endif%} form-group-sm">                                 
+                                 <div class="col-xs-offset-1 col-sm-offset-1 col-sm-9 col-xs-10">{% bootstrap_field sub_form.OC_LF_LPF show_label=False %} {{sub_form.OC_LF_LPF.errors}}</div>
+                              </div>
+                             <div class="form-group {%if sub_form.OC_PC.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-12">{% bootstrap_field sub_form.OC_PC show_label=False %} {{sub_form.OC_PC.errors}}</div>
+                              </div>                              
+                              <div class="form-group {%if sub_form.OC_MAN.errors %}has-error{%endif%} form-group-sm">                                         
+                                 <div class="col-sm-12">{% bootstrap_field sub_form.OC_MAN show_label=False %} {{sub_form.OC_MAN.errors}}</div>
+                              </div>                            
+                          </fieldset>       
+                          </div>
+                           <div class="col-xs-12 col-md-3">
+                          <fieldset> 
+                          <legend>Otras Observaciones</legend>
+                             <div class="form-group {%if sub_form.HM_OTRAS.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-12">{% bootstrap_field sub_form.HM_OTRAS show_label=False %} </div>
+                             </div>                     
+                          </fieldset>       
+                          </div>
+                  
+                      </div>
+                      </div>                    
+
+
+                      <div class="row">
+                      <hr> 
+                       <div class="col-md-12">
+                           <div class="col-xs-12 col-sm-12  col-md-6"> 
+                            <fieldset>
+                            <legend>Exámen General</legend>
+                            <div class="col-xs-12">
+                              <div class="form-group {%if form.ANESTESIA.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.ANESTESIA.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.ANESTESIA show_label=False %} {{form.ANESTESIA.errors}}</div>
+                              </div>  
+                              <div class="form-group {%if form.CLEARANCE.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.CLEARANCE.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.CLEARANCE show_label=False %} {{form.CLEARANCE.errors}}</div>
+                              </div>  
+
+                              <div class="form-group {%if form.MEDICAM_APTO.errors %}has-error{%endif%} form-group-sm">                                 
+                                 <div class="col-sm-12 col-sm-offset-4">{% bootstrap_field form.MEDICAM_APTO show_label=False %} {{form.MEDICAM_APTO.errors}}</div>
+                              </div>
+                              <div class="form-group {%if sub_form.ALERGIAS.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-3 control-label">{{sub_form.ALERGIAS.label}}</div>
+                                 <div class="col-sm-9">{% bootstrap_field sub_form.ALERGIAS show_label=False %} {{sub_form.ALERGIAS.errors}}</div>
+                              </div>  
+                            </div>   
+                            </fieldset>       
+                            </div>
+                        
+                            <div class="col-xs-12 col-sm-12  col-md-6">
+                              <fieldset>
+                              <legend>Historia Ocular Previa</legend>
+                              <div class="col-xs-12">
+                                <div class="col-xs-6">
+                                  <div class="form-group {%if form.HO_AMBL.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-12">{% bootstrap_field form.HO_AMBL show_label=False %} {{form.HO_AMBL.errors}}</div>
+                                  </div>
+                                </div>                             
+                                <div class="col-xs-6">
+                                  <div class="form-group {%if form.HO_DIPL.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-12">{% bootstrap_field form.HO_DIPL show_label=False %} {{form.HO_DIPL.errors}}</div>
+                                  </div> 
+                                </div> 
+                                <div class="form-group {%if form.HO_ECTA.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-5 col-xs-12 control-label">{{form.HO_ECTA.label}}</div>
+                                   <div class="col-sm-6 col-xs-12">{% bootstrap_field form.HO_ECTA show_label=False %} </div>
+                                </div>    
+                                <div class="form-group {%if form.HO_CX_REFRACTIVA.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-5 col-xs-12 control-label">{{form.HO_CX_REFRACTIVA.label}}</div>
+                                   <div class="col-sm-6 col-xs-12">{% bootstrap_field form.HO_CX_REFRACTIVA show_label=False %} </div>
+                                </div>
+                                <div class="form-group {%if form.TRATAM_GOTAS.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-5 col-xs-12 control-label">{{form.TRATAM_GOTAS.label}}</div>
+                                   <div class="col-sm-6 col-xs-12">{% bootstrap_field form.TRATAM_GOTAS show_label=False %} </div>
+                                </div>
+
+                                 <div class="form-group {%if form.OTRAS_GOTAS.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-3 col-xs-12 control-label">{{form.OTRAS_GOTAS.label}}</div>
+                                   <div class="col-sm-8 col-xs-12">{% bootstrap_field form.OTRAS_GOTAS show_label=False %}</div>
+                                </div>
+                               </div>     
+                              </fieldset>
+                            </div>       
+                        </div>
+                       </div>
+
+
+                        <div class="row"> 
+                        <hr>
+                        <div class="col-md-12">
+                          <div class="col-xs-12"> 
+                            <fieldset>
+                            <legend>Exámen Ocular</legend>
+                            <div class="col-xs-12  col-md-5">
+                              <div class="form-group {%if form.AVMCL.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-7 control-label">{{form.AVMCL.label}}</div>
+                                 <div class="col-sm-5">{% bootstrap_field form.AVMCL show_label=False show_help=False addon_after=form.AVMCL.help_text %}</div>
+                              </div>
+                              <div class="form-group {%if form.AVMCC.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-7 control-label">{{form.AVMCC.label}}</div>
+                                 <div class="col-sm-5">{% bootstrap_field form.AVMCC show_label=False show_help=False addon_after=form.AVMCC.help_text %}</div>
+                              </div>
+                              <div class="form-group {%if form.AVCE.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-7 control-label">{{form.AVCE.label}}</div>
+                                 <div class="col-sm-5">{% bootstrap_field form.AVCE show_label=False show_help=False addon_after=form.AVCE.help_text %}</div>
+                              </div>
+                              <div class="form-group {%if form.PIO.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-7 control-label">{{form.PIO.label}}</div>
+                                 <div class="col-sm-5">{% bootstrap_field form.PIO show_label=False show_help=False addon_after=form.PIO.help_text %}</div>
+                              </div>
+                              
+                              <div class="form-group {%if form.EO_OPACC.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-7 control-label">{{form.EO_OPACC.label}}</div>
+                                 <div class="col-sm-5">{% bootstrap_field form.EO_OPACC show_label=False show_help=False addon_after=form.EO_OPACC.help_text %}</div>
+                              </div>
+                              <div class="form-group {%if form.EO_GUTATTA.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-7 control-label">{{form.EO_GUTATTA.label}}</div>
+                                 <div class="col-sm-5">{% bootstrap_field form.EO_GUTATTA show_label=False show_help=False addon_after=form.EO_GUTATTA.help_text %}</div>
+                              </div>
+                               <div class="form-group {%if form.EO_RPUPIL.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-7 control-label">{{form.EO_RPUPIL.label}}</div>
+                                 <div class="col-sm-5">{% bootstrap_field form.EO_RPUPIL show_label=False show_help=False addon_after=form.EO_RPUPIL.help_text %}</div>
+                              </div>
+                              <div class="form-group {%if form.PCA.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-7 control-label">{{form.PCA.label}}</div>
+                                  <div class="col-sm-5">
+                                    <div class="col-xs-4 ">{% bootstrap_field form.PCA show_label=False %}</div>
+                                    <div class="col-xs-8"> {% bootstrap_field form.PCA_MM show_label=False show_help=False addon_after=form.PCA_MM.help_text %}</div>
+                                  </div>                               
+                              </div>
+                              <div class="form-group {%if form.EO_CAPSULA.errors %}has-error{%endif%} form-group-sm">
+                                  <div class="col-sm-7 control-label">{{form.EO_CAPSULA.label}}</div>
+                                <div class="col-sm-5">{% bootstrap_field form.EO_CAPSULA show_label=False show_help=False addon_after=form.EO_CAPSULA.help_text %}</div>
+                              </div>
+                              <div class="form-group {%if form.CAT_N.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-7 control-label">{{form.CAT_N.label}}</div>
+                                 <div class="col-sm-5">{% bootstrap_field form.CAT_N show_label=False show_help=False addon_after=form.CAT_N.help_text %}</div>
+                              </div>
+                              <div class="form-group {%if form.CAT_C.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-7 control-label">{{form.CAT_C.label}}</div>
+                                 <div class="col-sm-5">{% bootstrap_field form.CAT_C show_label=False show_help=False addon_after=form.CAT_C.help_text %}</div>
+                              </div>
+                              <div class="form-group {%if form.CAT_P.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-7 control-label">{{form.CAT_P.label}}</div>
+                                 <div class="col-sm-5">{% bootstrap_field form.CAT_P show_label=False show_help=False addon_after=form.CAT_P.help_text %}</div>
+                              </div>
+                               <div class="form-group {%if form.EO_COOP.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-7 control-label">{{form.EO_COOP.label}}</div>
+                                 <div class="col-sm-5">{% bootstrap_field form.EO_COOP show_label=False show_help=False addon_after=form.EO_COOP.help_text %}</div>
+                              </div>
+                              <div class="col-xs-12  col-md-offset-1">
+                                <div class="col-xs-6">
+                                  <div class="form-group {%if form.EO_CAT_HM.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-12  ">{% bootstrap_field form.EO_CAT_HM show_label=False %}</div>
+                                  </div>  
+                                  <div class="form-group {%if form.EO_CAT_B.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-12">{% bootstrap_field form.EO_CAT_B show_label=False %}</div>
+                                  </div> 
+                                  <div class="form-group {%if form.EO_CAT_R.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-12">{% bootstrap_field form.EO_CAT_R show_label=False %}</div>
+                                  </div> 
+                                  <div class="form-group {%if form.EO_CAT_N.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-12">{% bootstrap_field form.EO_CAT_N show_label=False %}</div>
+                                  </div>
+                                </div>
+                                <div class="col-xs-6">
+                                  <div class="form-group {%if form.EO_CAT_TX.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-12">{% bootstrap_field form.EO_CAT_TX show_label=False %}</div>
+                                  </div> 
+                                  <div class="form-group {%if form.EO_CAT_MO.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-12">{% bootstrap_field form.EO_CAT_MO show_label=False %}</div>
+                                  </div> 
+                                  <div class="form-group {%if form.EO_CAT_I.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-12">{% bootstrap_field form.EO_CAT_I show_label=False %}</div>
+                                  </div> 
+                                  <div class="form-group {%if form.EO_CAT_PP.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-12">{% bootstrap_field form.EO_CAT_PP show_label=False %}</div>
+                                  </div>
+                                </div>
+                             </div>
+                            </div>
+                            <div class="col-xs-12  col-md-6">
+                                  <div class="form-group {%if form.EO_PROM.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-offset-6 col-sm-5">{% bootstrap_field form.EO_PROM show_label=False %}</div>
+                                  </div>                                  
+                                   <div class="form-group {%if form.EO_BLEFA.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-offset-6 col-sm-5">{% bootstrap_field form.EO_BLEFA show_label=False %}</div>
+                                  </div>
+                                  <div class="form-group {%if form.EO_ENDID.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-7 control-label">{{form.EO_ENDID.label}}</div>
+                                     <div class="col-sm-5">{% bootstrap_field form.EO_ENDID show_label=False show_help=False addon_after=form.EO_ENDID.help_text %}</div>
+                                  </div>
+                                        
+                                  <div class="form-group {%if form.EO_DILATP.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-7 control-label">{{form.EO_DILATP.label}}</div>
+                                     <div class="col-sm-5">{% bootstrap_field form.EO_DILATP show_label=False show_help=False %}</div>
+                                  </div>
+                                  <div class="form-group {%if form.EO_AVP.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-7 control-label">{{form.EO_AVP.label}}</div>
+                                     <div class="col-sm-5">{% bootstrap_field form.EO_AVP show_label=False show_help=False %}</div>
+                                  </div>
+
+                                   <div class="form-group {%if form.EO_TINC.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-offset-6 col-sm-5">{% bootstrap_field form.EO_TINC show_label=False %}</div>
+                                  </div>  
+                                  <div class="form-group {%if form.EO_PELICULA.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-7 control-label">{{form.EO_PELICULA.label}}</div>
+                                     <div class="col-sm-5">{% bootstrap_field form.EO_PELICULA show_label=False show_help=False %}</div>
+                                  </div>
+                                  <div class="form-group {%if form.OJO_SECO.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-7 control-label">{{form.OJO_SECO.label}}</div>
+                                     <div class="col-sm-5">{% bootstrap_field form.OJO_SECO show_label=False show_help=False %}</div>
+                                  </div>
+                                  <div class="form-group {%if form.EO_IRID.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-7 control-label">{{form.EO_IRID.label}}</div>
+                                     <div class="col-sm-5">{% bootstrap_field form.EO_IRID show_label=False show_help=False %}</div>
+                                  </div>
+                                  <div class="form-group {%if form.EO_SINEQUIAS.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-7 control-label">{{form.EO_SINEQUIAS.label}}</div>
+                                     <div class="col-sm-5">{% bootstrap_field form.EO_SINEQUIAS show_label=False show_help=False %}</div>
+                                  </div>
+                                  <div class="form-group {%if form.EO_PSEUDO.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-offset-6 col-sm-5">{% bootstrap_field form.EO_PSEUDO show_label=False %}</div>
+                                  </div>  
+
+                                   <div class="form-group {%if form.EO_ZONULAS.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-7 control-label">{{form.EO_ZONULAS.label}}</div>
+                                     <div class="col-sm-5">{% bootstrap_field form.EO_ZONULAS show_label=False show_help=False %}</div>
+                                  </div>
+
+                                  
+                                  <div class="form-group {%if form.EO_OCT.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-7 control-label">{{form.EO_OCT.label}}</div>
+                                     <div class="col-sm-5">{% bootstrap_field form.EO_OCT show_label=False show_help=False %}</div>
+                                  </div>
+                                  <div class="form-group {%if form.EO_VITREO.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-7 control-label">{{form.EO_VITREO.label}}</div>
+                                     <div class="col-sm-5">{% bootstrap_field form.EO_VITREO show_label=False show_help=False %}</div>
+                                  </div>
+                                  
+                                  <div class="form-group {%if form.EO_RETINA.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-7 control-label">{{form.EO_RETINA.label}}</div>
+                                     <div class="col-sm-5">{% bootstrap_field form.EO_RETINA show_label=False show_help=False %}</div>
+                                  </div>
+                                  <div class="form-group {%if form.EO_ECO.errors %}has-error{%endif%} form-group-sm">
+                                     <div class="col-sm-offset-6 col-sm-5">{% bootstrap_field form.EO_ECO show_label=False %}</div>
+                                  </div> 
+                                  <div class="col-xs-12 col-sm-offset-1 col-md-offset-2">
+                                    <div class="col-xs-5">
+                                      <div class="form-group {%if form.EO_RET_DIAB.errors %}has-error{%endif%} form-group-sm">
+                                         <div class="col-sm-12  ">{% bootstrap_field form.EO_RET_DIAB show_label=False %}</div>
+                                      </div>  
+                                      <div class="form-group {%if form.EO_PAP_GLAU.errors %}has-error{%endif%} form-group-sm">
+                                         <div class="col-sm-12">{% bootstrap_field form.EO_PAP_GLAU show_label=False %}</div>
+                                      </div>                                      
+                                    </div>
+                                    <div class="col-xs-6">
+                                      <div class="form-group {%if form.EO_DEG_SENIL.errors %}has-error{%endif%} form-group-sm">
+                                       <div class="col-sm-12">{% bootstrap_field form.EO_DEG_SENIL show_label=False %}</div>
+                                      </div> 
+                                      <div class="form-group {%if form.EO_CIC_MAC.errors %}has-error{%endif%} form-group-sm">
+                                         <div class="col-sm-12">{% bootstrap_field form.EO_CIC_MAC show_label=False %}</div>
+                                      </div>                                       
+                                    </div>
+                                    
+                                 </div>
+                            </div>
+                          </fieldset>
+                        </div>
+                        </div>
+                        </div>
+
+                      <div class="row"> 
+                      <hr>
+                        <div class="col-xs-12">
+                          <div class="col-xs-12 col-md-3">
+                            <fieldset>
+                              <legend>Refracción Preoperatoria</legend>
+                                <div class="form-group {%if sub_form.RP_E.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-5 control-label">{{form.RP_E.label}}</div>
+                                   <div class="col-sm-5">{% bootstrap_field form.RP_E show_label=False show_help=False addon_after=form.RP_E.help_text %}</div>                                 
+                                </div>
+                                 <div class="form-group {%if sub_form.RP_C.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-5 control-label">{{form.RP_C.label}}</div>
+                                   <div class="col-sm-5">{% bootstrap_field form.RP_C show_label=False show_help=False addon_after=form.RP_C.help_text %}</div>                                 
+                                </div>
+                                 <div class="form-group {%if sub_form.RP_EJE.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-5 control-label">{{form.RP_EJE.label}}</div>
+                                   <div class="col-sm-5">{% bootstrap_field form.RP_EJE show_label=False show_help=False addon_after=form.RP_EJE.help_text %}</div>                                 
+                                </div>
+                            </fieldset>
+                          </div>  
+                          <div class="col-xs-12 col-md-3">
+                            <fieldset>
+                            <legend>Queratometría</legend>
+                              <div class="col-sm-12"><strong>Automática</strong></div>
+                              <div class="form-group {%if sub_form.QUERA_AK1_1.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-2 control-label cerca">{{form.QUERA_AK1_1.label}}</div>
+                                 <div class="col-sm-3">{% bootstrap_field form.QUERA_AK1_1 show_label=False show_help=False addon_after=" x "%}</div>                                 
+                                 <div class="col-sm-3 ">{% bootstrap_field form.QUERA_AK1_2 show_label=False show_help=False addon_after=form.QUERA_AK1_2.help_text %}</div>
+                              </div>
+                               <div class="form-group {%if sub_form.QUERA_AK2_1.errors %}has-error{%endif%} form-group-sm ">
+                                 <div class="col-sm-2 control-label cerca">{{form.QUERA_AK2_1.label}}</div>
+                                 <div class="col-sm-3 ">{% bootstrap_field form.QUERA_AK2_1 show_label=False show_help=False addon_after=" x "%}</div>                                
+                                 <div class="col-sm-3 ">{% bootstrap_field form.QUERA_AK2_2 show_label=False show_help=False addon_after=form.QUERA_AK2_2.help_text %}</div>
+                              </div>
+                              <div class="col-sm-12"><strong>Topográfica</strong></div>
+                               <div class="form-group {%if sub_form.QUERA_TK1_1.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-2 control-label">{{form.QUERA_TK1_1.label}}</div>
+                                 <div class="col-sm-4">{% bootstrap_field form.QUERA_TK1_1 show_label=False show_help=False addon_after=" x "%}</div>
+                                 <div class="col-sm-4">{% bootstrap_field form.QUERA_TK1_2 show_label=False show_help=False addon_after=form.QUERA_TK1_2.help_text%}</div>
+                              </div>
+                               <div class="form-group {%if sub_form.QUERA_TK2_1.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-2 control-label">{{form.QUERA_TK2_1.label}}</div>
+                                 <div class="col-sm-4">{% bootstrap_field form.QUERA_TK2_1 show_label=False show_help=False addon_after=" x "%}</div>
+                                 <div class="col-sm-4">{% bootstrap_field form.QUERA_TK2_2 show_label=False show_help=False addon_after=form.QUERA_TK2_2.help_text%}</div>
+                              </div>
+                            </fieldset>
+                          </div> 
+                          <div class="col-xs-12 col-md-3">
+                            <fieldset>
+                              <legend>Poder del LIO <span data-toggle="tooltip" data-placement="top" title="Lente Intra Ocular" class="badge badge-info">?</span></legend>
+                                <div class="form-group {%if sub_form.LIO_E.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-7 control-label">{{form.LIO_E.label}}</div>
+                                   <div class="col-sm-5">{% bootstrap_field form.LIO_E show_label=False show_help=False %}</div>                                 
+                                </div>
+                                 <div class="form-group {%if sub_form.LIO_C.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-7 control-label">{{form.LIO_C.label}}</div>
+                                   <div class="col-sm-5">{% bootstrap_field form.LIO_C show_label=False show_help=False %}</div>                                 
+                                </div>
+                                 <div class="form-group {%if sub_form.LIO_EJE.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-7 control-label">{{form.LIO_EJE.label}}</div>
+                                   <div class="col-sm-5">{% bootstrap_field form.LIO_EJE show_label=False show_help=False %}</div>
+                                </div>
+                                <div class="form-group {%if sub_form.CRISTALINO.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-7 control-label">{{form.CRISTALINO.label}}</div>
+                                   <div class="col-sm-5">{% bootstrap_field form.CRISTALINO show_label=False show_help=False %}</div>
+                                </div>
+                            </fieldset>
+                          </div>  
+                          <div class="col-xs-12 col-md-3">
+                            <fieldset>
+                            <legend>Pupilometría</legend>
+                              <div class="form-group {%if sub_form.PUPI_ESCO.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-7 control-label">{{form.PUPI_ESCO.label}}</div>
+                                   <div class="col-sm-5">{% bootstrap_field form.PUPI_ESCO show_label=False show_help=False %}</div>                                 
+                                </div>
+                                 <div class="form-group {%if sub_form.PUPI_FOTO.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-7 control-label">{{form.PUPI_FOTO.label}}</div>
+                                   <div class="col-sm-5">{% bootstrap_field form.PUPI_FOTO show_label=False show_help=False %}</div>                                 
+                                </div>
+                                 <div class="form-group {%if sub_form.PUPI_MESO.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-7 control-label">{{form.PUPI_MESO.label}}</div>
+                                   <div class="col-sm-5">{% bootstrap_field form.PUPI_MESO show_label=False show_help=False %}</div>
+                                </div>
+                                <div class="form-group {%if sub_form.ASFERICIDAD.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-7 control-label">{{form.ASFERICIDAD.label}}</div>
+                                   <div class="col-sm-5">{% bootstrap_field form.ASFERICIDAD show_label=False show_help=False %}</div>
+                                </div>                      
+                          </fieldset>
+                          </div>  
+                        </div>      
+                        </div>
+                      <div class="row"> 
+                        <hr>
+                        <div class="col-md-12">
+                          <div class="col-xs-12"> 
+                          <fieldset>
+                            <legend>Lecturas GALILEI®</legend>
+                            <div class="col-xs-12  col-md-6">
+                              <div class="form-group {%if form.GAL_ABERR_ESF.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-5 control-label">{{form.GAL_ABERR_ESF.label}}</div>
+                                 <div class="col-sm-7">{% bootstrap_field form.GAL_ABERR_ESF show_label=False show_help=False addon_after=form.GAL_ABERR_ESF.help_text%}</div>
+                              </div>  
+                              <div class="form-group {%if form.GAL_ASF.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-5 control-label">{{form.GAL_ASF.label}}</div>
+                                 <div class="col-sm-7">{% bootstrap_field form.GAL_ASF show_label=False show_help=False addon_after=form.GAL_ASF.help_text%}</div>
+                              </div>  
+                              <div class="form-group {%if form.GAL_EXCENTRICIDAD.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-5 control-label">{{form.GAL_EXCENTRICIDAD.label}}</div>
+                                 <div class="col-sm-7">{% bootstrap_field form.GAL_EXCENTRICIDAD show_label=False show_help=False addon_after=form.GAL_EXCENTRICIDAD.help_text%}</div>
+                              </div>  
+                              <div class="form-group {%if form.GAL_COMA_CORNEAL.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-5 control-label">{{form.GAL_COMA_CORNEAL.label}}</div>
+                                 <div class="col-sm-7">{% bootstrap_field form.GAL_COMA_CORNEAL show_label=False show_help=False addon_after=form.GAL_COMA_CORNEAL.help_text%}</div>
+                              </div>  
+                              
+                            </div>
+                             <div class="col-xs-12  col-md-6">
+                              <div class="form-group {%if form.GAL_TREFOIL.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.GAL_TREFOIL.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.GAL_TREFOIL show_label=False show_help=False addon_after=form.GAL_TREFOIL.help_text%}</div>
+                              </div>  
+                              <div class="form-group {%if form.GAL_QUATREFOIL.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.GAL_QUATREFOIL.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.GAL_QUATREFOIL show_label=False show_help=False addon_after=form.GAL_QUATREFOIL.help_text%}</div>
+                              </div>  
+                              <div class="form-group {%if form.GAL_ABERRACIONES.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.GAL_ABERRACIONES.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.GAL_ABERRACIONES show_label=False show_help=False addon_after=form.GAL_ABERRACIONES.help_text%}</div>
+                              </div>  
+                              <div class="form-group {%if form.GAL_DIST_KAPPA.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.GAL_DIST_KAPPA.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.GAL_DIST_KAPPA show_label=False show_help=False addon_after=form.GAL_DIST_KAPPA.help_text%}</div>
+                              </div>  
+                              
+                            </div>
+                          </fieldset>
+                        </div>
+                        </div>
+                      </div>
+
+                       <div class="row">
+                        <hr> 
+                        <div class="col-md-12">
+                           <div class="col-xs-12 col-sm-6 col-md-4"> 
+                            <fieldset>
+                            <legend>Fórmulas</legend>
+                            <div class="col-xs-12 col-sm-12">                                                            
+                              <div class="form-group {%if form.LAX.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.LAX.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.LAX show_label=False show_help=False addon_after=form.LAX.help_text%}</div>
+                              </div>  
+                              <div class="form-group {%if form.PAQ.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.PAQ.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.PAQ show_label=False show_help=False addon_after=form.PAQ.help_text%} </div>
+                              </div>  
+                              <div class="form-group {%if form.REC_ENDO.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.REC_ENDO.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.REC_ENDO show_label=False show_help=False addon_after=form.REC_ENDO.help_text%} </div>
+                              </div>  
+                              <div class="form-group {%if form.TIPO_FORMULA.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.TIPO_FORMULA.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.TIPO_FORMULA show_label=False show_help=False addon_after=form.TIPO_FORMULA.help_text%} </div>
+                              </div>  
+                              <div class="form-group {%if form.CTE_A.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.CTE_A.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.CTE_A show_label=False show_help=False %} </div>
+                              </div>  
+
+                           
+                            </div>   
+                            </fieldset>       
+                            </div>
+                        
+                            <div class="col-xs-12 col-sm-6  col-md-4">
+                              <fieldset>
+                              <legend>Sitio de la Incisión</legend>
+                              <div class="col-xs-12 col-sm-12">
+                                <div class="form-group {%if form.INCIS.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.INCIS.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.INCIS show_label=False show_help=False addon_after=form.INCIS.help_text%} </div>
+                                </div>  
+                                <div class="form-group {%if form.TIPO_I.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-6 control-label">{{form.TIPO_I.label}}</div>
+                                   <div class="col-sm-6">{% bootstrap_field form.TIPO_I show_label=False show_help=False addon_after=form.TIPO_I.help_text%} </div>
+                                </div>  
+                                <div class="form-group {%if form.TIPO_INCIS.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.TIPO_INCIS.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.TIPO_INCIS show_label=False show_help=False %} </div>
+                                </div>  
+                                <div class="form-group {%if form.INCIS_TAM.errors %}has-error{%endif%} form-group-sm">
+                                   <div class="col-sm-6 control-label">{{form.INCIS_TAM.label}}</div>
+                                   <div class="col-sm-6">{% bootstrap_field form.INCIS_TAM show_label=False show_help=False%} </div>
+                                </div>  
+                                <div class="form-group {%if form.INCIS_E1.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.INCIS_E1.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.INCIS_E1 show_label=False show_help=False addon_after=form.INCIS_E1.help_text%} </div>
+                                </div>  
+                                <div class="form-group {%if form.INCIS_E2.errors %}has-error{%endif%} form-group-sm">
+                                 <div class="col-sm-6 control-label">{{form.INCIS_E2.label}}</div>
+                                 <div class="col-sm-6">{% bootstrap_field form.INCIS_E2 show_label=False show_help=False addon_after=form.INCIS_E2.help_text%} </div>
+                                </div>  
+                               </div>     
+                              </fieldset>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4">
+                              <fieldset>
+                                <legend>Observaciones</legend>
+                                  <div class="form-group {%if form.OBSERVACIONES.errors %}has-error{%endif%} form-group-sm">
+                                    {{form.OBSERVACIONES}}
+                                  </div>
+                              </fieldset>      
+                            </div>       
+                        </div>
+                    </div>
+                      
+                    <div class="row">
+                      <hr> 
+                      <div style="margin-top: 30px;margin-left:20px;">                       
+                              <div class="col-xs-12 col-sm-9 ">
+                              {{form.aceptoTyC}}            
+                              <label style="display: inline;">Acepto los <a href="#" id="toc_link">Términos y Condiciones</a>.</label>
+                              {%if form.aceptoTyC.errors %}
+                              <p><label for="id_acpetoTyC" generated="true" class="has-error" style="color:red;display: inline;">Debe Aceptar los términos y condiciones para poder Guardar el Exámen. </label></p>
+                              {%endif%}
+
+                              {% include "terminosYcondic.html" %}
+                              </div>
+                              <div class="col-xs-12 col-sm-2">
+                                <button type="submit" class="btn btn-theme boton" style="margin-bottom: 10px;margin-right:auto;margin-left:auto;"> Guardar </button>
+                              </div>
+                        </div> 
+                      </div>
+     
+
+                   </form>
+                 </div>
+             </div>    
+        </div>
+</section>
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+      function scrollTo(selector) {
+        var targetOffset = $(selector).offset().top;
+        $('html,body').animate({scrollTop: targetOffset}, 500);
+    };
+    
+        $('#add_comment_toggle').click(function() {
+            $('form.add_comment').slideToggle();
+            scrollTo('form.add_comment');
+            return false;
+        });
+        {% if comment_error %}
+        $('form.add_comment').show();
+        scrollTo('.comment_error');
+        {% endif %}
+    });
+</script>
+{% endblock principal %}

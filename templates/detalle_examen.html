@@ -1,0 +1,543 @@
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% load crispy_forms_tags %}
+<link rel="stylesheet" href="{% static 'css/modals.css' %}" type="text/css" />
+{% block principal %}
+                     <div class="row"> 
+                      	<div class="col-xs-12 col-sm-4">
+                        	<fieldset>
+                      		<legend>Información del Paciente</legend>
+                             <div class="col-xs-12 ">
+                              <div class="row"> 
+                                 <div class="col-sm-3 control-label">Nombre:</div>
+                                 <div class="col-sm-9">{{examen.paciente.nombre}}</div>
+                              </div>
+                              <div class="row"> 
+                                 <div class="col-sm-3 control-label">Dirección:</div>
+                                 <div class="col-sm-9">{{examen.paciente.direccion|default_if_none:"---"}} </div>
+                              </div>
+                              <div class="row"> 
+                                 <div class="col-sm-3 control-label">Teléfonos:</div>
+                                 <div class="col-sm-9">{{examen.paciente.telefonos|default_if_none:"---"}} </div>
+                              </div>
+                              <div class="row"> 
+                                 <div class="col-sm-3 control-label">Obra Social:</div>
+                                 <div class="col-sm-9">{{examen.paciente.os|default_if_none:"---"}} </div>
+                              </div>                           
+                                <div class="row"> 
+                                 <div class="col-sm-4 control-label">Sexo:</div>
+                                 <div class="col-sm-8">{{examen.paciente.get_sexo_display|default_if_none:"---"}}</div>
+                                </div>
+                                <div class="row"> 
+                                 <div class="col-sm-4 control-label">Edad:</div>
+                                 <div class="col-sm-8">{{examen.paciente.edad|default_if_none:"---"}}</div>
+                                </div>
+                                <div class="row"> 
+                                 <div class="col-sm-4 control-label">Documento:</div>
+                                 <div class="col-sm-8">{{examen.paciente.nrodocu|default_if_none:"---"}}</div>
+                                </div>                                
+                                <div class="row"> 
+                                 <div class="col-sm-4 control-label">Ojo:</div>
+                                 <div class="col-sm-8">{{examen.get_ojo_display|default_if_none:"---"}}</div>
+                                </div>
+                            </div>
+                      		</fieldset>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <fieldset>
+                            <legend>Historia Médica</legend>                                
+                                <div class="row"> 
+                                 <div class="col-sm-10 control-label">Enfermedad Cardíaca:</div>
+                                 <div class="col-sm-2">{{examen.paciente.HM_EC|yesno:"Si,No,No" }}</div>
+                                </div>
+                                <div class="row"> 
+                                 <div class="col-sm-10 control-label">Hipertensión Arterial:</div>
+                                 <div class="col-sm-2">{{examen.paciente.HM_HTA|yesno:"Si,No,No"}}</div>
+                                 </div>
+                                <div class="row"> 
+                                 <div class="col-sm-10 control-label">Diabetes:</div>
+                                 <div class="col-sm-2">{{examen.paciente.HM_DBT|yesno:"Si,No,No"}}</div>
+                                 </div>
+                                <div class="row"> 
+                                 <div class="col-sm-10 control-label">Enfermedad Tiroidea:</div>
+                                 <div class="col-sm-2">{{examen.paciente.HM_ET|yesno:"Si,No,No"}}</div>
+                                 </div>
+                                <div class="row"> 
+                                 <div class="col-sm-10 control-label">Enfermedad Pulmonar Crónica:</div>
+                                 <div class="col-sm-2">{{examen.paciente.HM_EPOC|yesno:"Si,No,No"}}</div>
+                                 </div>
+                          </fieldset>
+                          </div>        
+                       
+                       
+                          <div class="col-xs-12 col-sm-4">
+                            <fieldset>                            
+                               <legend>Medicaciones</legend>
+                                   <div class="row">
+                                    <div class="col-sm-10 control-label">Aspirina / Aspirineta:</div> 
+                                    <div class="col-sm-2">{{examen.paciente.MEDICAC_AAS|yesno:"Si,No,No"}}</div>
+                                   </div>
+                                   <div class="row"> 
+                                    <div class="col-sm-10 control-label">Anticoagulantes Orales:</div>
+                                    <div class="col-sm-2">{{examen.paciente.MEDICAC_ACOAG|yesno:"Si,No,No"}}</div>
+                                   </div>
+                                   <div class="row"> 
+                                    <div class="col-sm-10 control-label">Antiprostáticos:</div>
+                                    <div class="col-sm-2">{{examen.paciente.MEDICAC_ABLOQ|yesno:"Si,No,No"}}</div>
+                                  </div>
+                                  <div class="row"> 
+                                   <div class="col-sm-10 control-label">Cesó toma de AAS y/o ACOAG:</div>
+                                   <div class="col-sm-2">{{examen.paciente.TOMA_AAS_ACOAG|yesno:"Si,No,No"}}</div>
+                                   </div>
+                            </fieldset>       
+                          </div> 
+                      </div>
+                      <div class="row"> 
+                        <hr>
+                        <div class="col-md-12">                                  
+                          <div class="col-xs-12 col-sm-4">
+                            <fieldset> 
+                              <legend>Ocupación/Hobbies</legend>
+                                <div class="row">
+                                    <div class="col-sm-6 control-label">Tipo Lector:</div> 
+                                    <div class="col-sm-6">{{examen.paciente.get_OC_LF_LPF_display|default_if_none:"---"}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 control-label">Trabaja con PC:</div> 
+                                    <div class="col-sm-6">{{examen.paciente.OC_PC|yesno:"Si,No,No"}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 control-label">Maneja de Noche:</div> 
+                                    <div class="col-sm-6">{{examen.paciente.OC_MAN|yesno:"Si,No,No"}}</div>
+                                </div>                             
+                            </fieldset>       
+                          </div>
+                      
+                           <div class="col-xs-12 col-sm-4"> 
+                            <fieldset>
+                            <legend>Exámen General</legend>
+                            <div class="col-xs-12">
+                                 
+                                <div class="row">
+                                 <div class="col-sm-8 control-label">Anestesia:</div> 
+                                 <div class="col-sm-4">{{examen.get_ANESTESIA_display}}</div>
+                                </div>
+                                <div class="row"> 
+                                 <div class="col-sm-8 control-label">Clearance Medicamentoso:</div> 
+                                 <div class="col-sm-4">{{examen.get_CLEARANCE_display}}</div>
+                                </div>            
+                                <div class="row"> 
+                                 <div class="col-sm-8 control-label">Medicamente Apto:</div> 
+                                 <div class="col-sm-4">{{examen.MEDICAM_APTO|yesno:"Si,No,No"}} </div>
+                                </div>
+                                <div class="row"> 
+                                 <div class="col-sm-8 control-label">Alergias:</div> 
+                                 <div class="col-sm-4">{{examen.paciente.ALERGIAS|default_if_none:"---"}}</div>
+                                </div>
+                            </div>   
+                            </fieldset>       
+                            </div>
+                        
+                            <div class="col-xs-12 col-sm-4">
+                              <fieldset>
+                              <legend>Historia Ocular Previa</legend>
+                              <div class="col-xs-12">
+                                <div class="row">
+                                 <div class="col-sm-8 control-label">Ambliopía:</div> 
+                                 <div class="col-sm-4">{{examen.HO_AMBL|yesno:"Si,No,No"}}</div>
+                                </div>
+                                <div class="row">
+                                 <div class="col-sm-8 control-label">Diplopía:</div> 
+                                 <div class="col-sm-4">{{examen.HO_DIPL|yesno:"Si,No,No"}}</div>
+                                </div>                          
+                                <div class="row">
+                                 <div class="col-sm-8 control-label">Ectasia:</div> 
+                                 <div class="col-sm-4">{{examen.HO_ECTA|yesno:"Si,No,No"}}</div>
+                                </div>
+                                <div class="row">
+                                 <div class="col-sm-8 control-label">Cirugía Refractiva Previa:</div> 
+                                 <div class="col-sm-4">{{examen.HO_CX_REFRACTIVA|yesno:"Si,No,No"}}</div>
+                                </div>
+                                <div class="row">
+                                 <div class="col-sm-8 control-label">Tratamiento con Gotas:</div> 
+                                 <div class="col-sm-4">{{examen.get_TRATAM_GOTAS_display|default_if_none:"---"}}</div>
+                                </div>
+                                <div class="row">
+                                 <div class="col-sm-8 control-label">Otras Gotas:</div> 
+                                 <div class="col-sm-4">{{examen.OTRAS_GOTAS|default_if_none:"---"}}</div>
+                                </div>
+                               </div>     
+                              </fieldset>
+                            </div> 
+                           
+                        </div>
+                       </div>
+                       {% if examen.paciente.HM_OTRAS %}
+                       <hr>
+                       <div class="row">
+                            <div class="col-xs-12">
+                              <fieldset> 
+                              <legend>Otras Observaciones</legend>
+                                  <div class="row">
+                                     <div class="col-sm-12">{{examen.paciente.HM_OTRAS|default_if_none:"---"}} </div>
+                                  </div>                                       
+                              </fieldset>       
+                            </div>      
+                       </div>
+                       {% endif %}
+                       <hr>
+                       <div class="row">
+                        <div class="col-md-12">
+                          <fieldset>
+                            <legend>Exámen Ocular</legend>
+                            <div class="col-xs-12  col-sm-4">
+                                 <div class="row">
+                                   <div class="col-sm-8 control-label">Agudeza visual mejor corregida de lejos:</div> 
+                                   <div class="col-sm-4">{{examen.get_AVMCL_display|default_if_none:"---"}} [D]</div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Agudeza visual mejor corregida de cerca:</div> 
+                                   <div class="col-sm-4">{{examen.get_AVMCC_display|default_if_none:"---"}} [J]</div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Agudeza visual con estenopeico:</div> 
+                                   <div class="col-sm-4">{{examen.get_AVCE_display|default_if_none:"---"}} [D]</div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Presión Intraocular:</div> 
+                                   <div class="col-sm-4">{{examen.PIO|default_if_none:"---"}} [mmHg]</div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Opacidad Corneal:</div> 
+                                   <div class="col-sm-4">{{examen.get_EO_OPACC_display|default_if_none:"---"}}</div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Córnea Gutatta:</div> 
+                                   <div class="col-sm-4">{{examen.get_EO_GUTATTA_display|default_if_none:"---"}}</div>
+                                </div>
+                                 <div class="row">
+                                   <div class="col-sm-8 control-label">Reflejo Rojo Pupilar:</div> 
+                                   <div class="col-sm-4">{{examen.get_EO_RPUPIL_display|default_if_none:"---"}}</div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Profundidad Cámara Anterior:</div> 
+                                   <div class="col-sm-4">{{examen.get_PCA_display|default_if_none:"---"}} {% if examen.PCA_MM %} {{examen.PCA_MM|default_if_none:"" }} [mm]{% endif %}</div>
+                                </div>                               
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Cápsula Anterior:</div> 
+                                   <div class="col-sm-4">{{examen.get_EO_CAPSULA_display|default_if_none:"---"}}</div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Catarata Nuclear:</div> 
+                                   <div class="col-sm-4">{{examen.get_CAT_N_display|default_if_none:"---"}} [D]</div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Catarata Cortical:</div> 
+                                   <div class="col-sm-4">{{examen.get_CAT_C_display|default_if_none:"---"}} [D]</div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Catarata Posterior:</div> 
+                                   <div class="col-sm-4">{{examen.get_CAT_P_display|default_if_none:"---"}} [D]</div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Cooperación Paciente:</div> 
+                                   <div class="col-sm-4">{{examen.get_EO_COOP_display|default_if_none:"---"}}</div>
+                                </div>
+                              </div>
+                              <div class="col-xs-12  col-sm-4">
+                             
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Hipermadura:</div> 
+                                   <div class="col-sm-4">{{examen.EO_CAT_HM|yesno:"Si,No,No"}}</div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Brunescente:</div> 
+                                   <div class="col-sm-4">{{examen.EO_CAT_B|yesno:"Si,No,No"}}</div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Rubra:</div> 
+                                   <div class="col-sm-4">{{examen.EO_CAT_R|yesno:"Si,No,No"}}</div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-sm-8 control-label">Negra:</div> 
+                                   <div class="col-sm-4">{{examen.EO_CAT_N|yesno:"Si,No,No"}}</div>
+                                </div>
+                                 
+                                  <div class="row">
+                                     <div class="col-sm-8 control-label">Traumática:</div> 
+                                     <div class="col-sm-4">{{examen.EO_CAT_TX|yesno:"Si,No,No"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-8 control-label">Morgagniana:</div> 
+                                     <div class="col-sm-4">{{examen.EO_CAT_MO|yesno:"Si,No,No"}}</div>
+                                  </div>
+                                   <div class="row">
+                                     <div class="col-sm-8 control-label">Intumescente:</div> 
+                                     <div class="col-sm-4">{{examen.EO_CAT_I|yesno:"Si,No,No"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-8 control-label">Polar Posterior:</div> 
+                                     <div class="col-sm-4">{{examen.EO_CAT_PP|yesno:"Si,No,No"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-8 control-label">Prominencia Frontal/Enoftalmos:</div> 
+                                     <div class="col-sm-4">{{examen.EO_PROM|yesno:"Si,No,No"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-8 control-label">Blefaritis:</div> 
+                                     <div class="col-sm-4">{{examen.EO_BLEFA|yesno:"Si,No,No"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-8 control-label">Hendidura Palpebral:</div> 
+                                     <div class="col-sm-4">{{examen.get_EO_ENDID_display}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-8 control-label">Dilatación Pupilar:</div> 
+                                     <div class="col-sm-4">{{examen.get_EO_DILATP_display}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-8 control-label">Agudeza visual Potencial (PAM/LOTMAR):</div> 
+                                     <div class="col-sm-4">{{examen.get_EO_AVP_display|default_if_none:"---"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-8 control-label">Tinción con Azul Tripán:</div> 
+                                     <div class="col-sm-4">{{examen.EO_TINC|yesno:"Si,No,No"}}</div>
+                                  </div>
+                                  </div>
+                                  <div class="col-xs-12  col-sm-4">
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Película Lagrimal:</div> 
+                                     <div class="col-sm-6">{{examen.get_EO_PELICULA_display|default_if_none:"---"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Grado Severidad Ojo Seco:</div> 
+                                     <div class="col-sm-6">{{examen.get_OJO_SECO_display|default_if_none:"---"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Configuración Iridiana:</div> 
+                                     <div class="col-sm-6">{{examen.get_EO_IRID_display|default_if_none:"---"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Sinequias Posteriores:</div> 
+                                     <div class="col-sm-6">{{examen.get_EO_SINEQUIAS_display|default_if_none:"---"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Pseudoexfoliación:</div> 
+                                     <div class="col-sm-6">{{examen.EO_PSEUDO|yesno:"Si,No,No"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Zónulas:</div> 
+                                     <div class="col-sm-6">{{examen.get_EO_ZONULAS_display|default_if_none:"---"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Sinequias Posteriores:</div> 
+                                     <div class="col-sm-6">{{examen.get_EO_OCT_display|default_if_none:"---"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Vítreo:</div> 
+                                     <div class="col-sm-6">{{examen.get_EO_VITREO_display|default_if_none:"---"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Retina:</div> 
+                                     <div class="col-sm-6">{{examen.get_EO_RETINA_display|default_if_none:"---"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Necesita ECO:</div> 
+                                     <div class="col-sm-6">{{examen.EO_ECO|yesno:"Si,No,No"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Retinapatía Diabética:</div> 
+                                     <div class="col-sm-6">{{examen.EO_RET_DIAB|yesno:"Si,No,No"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Papila Glaucomatosa:</div> 
+                                     <div class="col-sm-6">{{examen.EO_PAP_GLAU|yesno:"Si,No,No"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Degeneración Macular Senil/Tóxica:</div> 
+                                     <div class="col-sm-6">{{examen.EO_DEG_SENIL|yesno:"Si,No,No"}}</div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-sm-6 control-label">Cicatriz Macular/MER:</div> 
+                                     <div class="col-sm-6">{{examen.EO_CIC_MAC|yesno:"Si,No,No"}}</div>
+                                  </div>
+                            </div>                            
+                          </fieldset>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">                       
+                        <div class="col-xs-12">
+                          <div class="col-xs-12 col-sm-3">
+                            <fieldset>
+                              <legend>Refracción Preoperatoria</legend>
+                                <div class="row">
+                                     <div class="col-sm-4 control-label">Esfera:</div> 
+                                     <div class="col-sm-8">{{examen.RP_E}} [D]</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-4 control-label">Cilindro:</div> 
+                                     <div class="col-sm-8">{{examen.RP_C}} [D]</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-4 control-label">Eje:</div> 
+                                     <div class="col-sm-8">{{examen.RP_EJE}} [º]</div>
+                                </div>                                
+                            </fieldset>
+                          </div>  
+                          <div class="col-xs-12 col-sm-3">
+                            <fieldset>
+                            <legend>Queratometría</legend>
+                              <div class="col-sm-12"><strong>Automática</strong></div>
+                              <div class="row">
+                                     <div class="col-sm-12 control-label">K1: {{examen.QUERA_AK1_1|default_if_none:"---"}} [D] {{examen.QUERA_AK1_2|default_if_none:"---"}} [º]</div>
+                              </div>
+                              <div class="row">
+                                     <div class="col-sm-12 control-label">K2: {{examen.QUERA_AK2_1|default_if_none:"---"}} [D] {{examen.QUERA_AK2_2|default_if_none:"---"}} [º]</div>
+                              </div>
+
+                              <div class="col-sm-12"><strong>Topográfica</strong></div>
+                               <div class="row">
+                                     <div class="col-sm-12 control-label">K1: {{examen.QUERA_TK1_1|default_if_none:"---"}} [D] {{examen.QUERA_TK1_2|default_if_none:"---"}} [º]</div>
+                              </div>
+                              <div class="row">
+                                     <div class="col-sm-12 control-label">K2: {{examen.QUERA_TK2_1|default_if_none:"---"}} [D] {{examen.QUERA_TK2_2|default_if_none:"---"}} [º]</div>
+                              </div>
+                            </fieldset>
+                          </div> 
+                          <div class="col-xs-12 col-md-3">
+                            <fieldset>
+                              <legend>Poder del LenteIntraOcular </legend>
+                                <div class="row">
+                                     <div class="col-sm-8 control-label">Esfera:</div> 
+                                     <div class="col-sm-4">{{examen.LIO_E|default_if_none:"---"}} [D]</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-8 control-label">Cilindro:</div> 
+                                     <div class="col-sm-4">{{examen.LIO_C|default_if_none:"---"}} [D]</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-8 control-label">Eje:</div> 
+                                     <div class="col-sm-4">{{examen.LIO_EJE|default_if_none:"---"}} [º]</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-8 control-label">Grosor del Cristalino:</div> 
+                                     <div class="col-sm-4">{{examen.CRISTALINO|default_if_none:"---"}} [mm]</div>
+                                </div>
+                               
+                            </fieldset>
+                          </div>  
+                          <div class="col-xs-12 col-md-3">
+                            <fieldset>
+                            <legend>Pupilometría</legend>
+                              <div class="row">
+                                     <div class="col-sm-8 control-label">Escotópica:</div> 
+                                     <div class="col-sm-4">{{examen.PUPI_ESCO|default_if_none:"---"}} [mm]</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-8 control-label">Fotópica:</div> 
+                                     <div class="col-sm-4">{{examen.PUPI_FOTO|default_if_none:"---"}} [mm]</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-8 control-label">Mesotópica:</div> 
+                                     <div class="col-sm-4">{{examen.PUPI_MESO|default_if_none:"---"}} [mm]</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-8 control-label">Asfericidad Corneal(Q):</div> 
+                                     <div class="col-sm-4">{{examen.ASFERICIDAD|default_if_none:"---"}} [mm]</div>
+                                </div>          
+                          </fieldset>
+                          </div>  
+                        </div>      
+                        </div>
+
+                       <div class="row">
+                        <hr> 
+                        <div class="col-xs-12">
+                           <div class="col-xs-12 {% if examen.OBSERVACIONES %}col-sm-4{% else %}col-sm-6{% endif %}"> 
+                            <fieldset>
+                            <legend>Fórmulas</legend>
+                                <div class="row">
+                                     <div class="col-sm-6 control-label">Aberrometría:</div> 
+                                     <div class="col-sm-6">{{examen.get_ABERROM_display|default_if_none:"---"}} [mm]</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-6 control-label">Longitud Axial:</div> 
+                                     <div class="col-sm-6">{{examen.LAX|default_if_none:"---"}} [mm]</div>
+                                </div>                               
+                                <div class="row">
+                                     <div class="col-sm-6 control-label">Paquimetría Corneal:</div> 
+                                     <div class="col-sm-6">{{examen.PAQ|default_if_none:"---"}} [µm]</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-6 control-label">Recuento Endotelial:</div> 
+                                     <div class="col-sm-6">{{examen.get_REC_ENDO_display|default_if_none:"---"}} [cel./mm2]</div>
+                                </div>  
+                                <div class="row">
+                                     <div class="col-sm-6 control-label">Fórmula a Utilizar:</div> 
+                                     <div class="col-sm-6">{{examen.get_TIPO_FORMULA_display|default_if_none:"---"}} </div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-6 control-label">Cte.A Lente Intraocular:</div> 
+                                     <div class="col-sm-6">{{examen.get_CTE_A_display|default_if_none:"---"}}</div>
+                                </div>                             
+                            </fieldset>       
+                            </div>
+                        
+                            <div class="col-xs-12 {% if examen.OBSERVACIONES %}col-sm-4{% else %}col-sm-6{% endif %}">
+                              <fieldset>
+                              <legend>Sitio de la Incisión</legend>
+                                <div class="row">
+                                     <div class="col-sm-8 control-label">Sitio Incisión:</div> 
+                                     <div class="col-sm-4">{{examen.INCIS|default_if_none:"---"}} [º]</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-8 control-label">Tratamiento Astigmatismo con Incisiones:</div> 
+                                     <div class="col-sm-4">{{examen.get_TIPO_I_display|default_if_none:"---"}} </div>
+                                </div>                               
+                                <div class="row">
+                                     <div class="col-sm-8 control-label">Tipo:</div> 
+                                     <div class="col-sm-4">{{examen.get_TIPO_INCIS_display|default_if_none:"---"}}</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-8 control-label">Tamaño:</div> 
+                                     <div class="col-sm-4">{{examen.INCIS_TAM|default_if_none:"---"}} [mm]</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-8 control-label">Eje 1:</div> 
+                                     <div class="col-sm-4">{{examen.INCIS_E1|default_if_none:"---"}} [º]</div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-8 control-label">Eje 2:</div> 
+                                     <div class="col-sm-4">{{examen.INCIS_E2|default_if_none:"---"}} [º]</div>
+                                </div>
+                              
+                              </fieldset>
+                            </div>
+                            {% if examen.OBSERVACIONES %}
+                            <div class="col-xs-12 col-sm-4">
+                              <fieldset> 
+                              <legend>Observaciones</legend>
+                                  <div class="row">
+                                     <div class="col-sm-12">{{examen.OBSERVACIONES}} </div>
+                                  </div>                                       
+                              </fieldset>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                      <hr> 
+                      <div style="margin-top: 30px;margin-left:20px;">
+                                          
+                                <div class="col-xs-12 col-sm-2">
+                                  <a href="{% url 'imprimir_examen' examen.pk %}" class="btn btn-theme boton pull-right" target="_blank" style="margin-bottom: 10px;margin-right:auto;margin-left:auto;">Imprimir</a>
+                                 
+                                </div>
+                        
+                      </div> 
+                    </div>
+     
+
+{% endblock principal %}

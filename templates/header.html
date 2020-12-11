@@ -1,0 +1,80 @@
+{% load static from staticfiles %}
+ <header id="top" class="header navbar-fixed-top" data-spy="affix" data-offset-top="150">  
+        <div class="container">            
+            <h1 class="logo pull-left">
+                <a class="scrollto" href="#promo">
+                    <img id="logo-image" class="logo-image" src="{% static 'images/icono.png' %}" alt="Logo">
+                    <span class="logo-title"><span class="marca">CataMasteR</span></span>
+                </a>
+            </h1><!--//logo-->              
+            <nav id="main-nav" class="main-nav navbar-right" role="navigation">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button><!--//nav-toggle-->
+                </div><!--//navbar-header-->            
+                <div class="navbar-collapse collapse" id="navbar-collapse">
+                    <ul class="nav navbar-nav">                        
+                        
+                        {% if user.is_authenticated %}
+                        <li class="nav-item"><a href="/listado/">  EXÁMENES</a></li>
+                        {% if user.is_superuser%}
+                        <li class="nav-item"><a href="/admin/"> ADMINISTRAR</a></li>
+                        {% endif %}
+                        <li class="nav-item"><a href="/logout/"><strong> SALIR</strong></a></li>
+                        {% else %}
+                            {% if not registracion %}
+                            <li class="active nav-item"><a class="scrollto" href="#promo">INICIO</a></li>
+                            <li class="nav-item"><a class="scrollto" href="#historia">HISTORIA</a></li>
+                            <li class="nav-item"><a class="scrollto" href="#story">CREADORES</a></li>                        
+                            <li class="nav-item last"><a class="scrollto" href="#contact">CONTACTO</a></li>                                                
+                            {% endif %}
+                            <ul class="nav navbar-nav navbar-right">                           
+                                <li class="dropdown nav-item">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>LOGIN</b> <span class="caret"></span></a>
+                                    <ul id="login-dp" class="dropdown-menu">
+                                        <li>
+                                             <div class="row">
+                                                    <div class="col-md-12">                                                    
+                                                        <form id="login-nav" accept-charset="UTF-8" role="form" autocomplete="on" class="form-signin" action="/login/" method="post">
+                                                                {% csrf_token %}
+                                                                <div class="form-group name">
+                                                                    <label class="sr-only" for="username">Nombre de Usuario / E-mail</label>
+                                                                    <input id="username" name="username" type="text" required="required" class="form-control" placeholder="Nombre de Usuario / E-mail">
+                                                                </div>
+                                                                <div class="form-group email">
+                                                                    <label class="sr-only" for="password">Password</label>
+                                                                    <input id="password" name="password" type="password" required="required" class="form-control" placeholder="Password">
+                                                                </div>
+                                                                {% if messages %}
+                                                                {% for message in messages %}
+                                                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                <strong>{{ message }}</strong>
+                                                                
+                                                                </div>
+                                                                 {% endfor %}
+                                                                {% endif %}
+                                                                <div class="form-group">
+                                                                     <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+                                                                </div>
+                                                                
+                                                        </form>
+                                                    </div>
+                                                    <div class="bottom text-center">
+                                                        ¿No posée usuario? <a href="/registrarse/"><b>Registrarse</b></a>
+                                                    </div>
+                                             </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            {% endif %}
+                    </ul><!--//nav-->
+                </div><!--//navabr-collapse-->
+            </nav><!--//main-nav-->           
+        </div>
+    </header><!--//header-->

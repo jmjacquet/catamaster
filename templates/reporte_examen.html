@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CATAMASTER - REPORTE EXAMEN {{examen.paciente.nombre}} </title>
+<style type="text/css">
+ @page {
+           size: A4;
+           margin: 1cm 0.7cm 2.5cm 1cm;
+           padding: 0;         
+         @frame footer {
+                        -pdf-frame-content: page-footer;
+                        bottom: 0cm;
+                        margin-left: 1cm;
+                        margin-right: 0.7cm;
+                        height: 0.5cm;
+                    }
+         @frame header {
+                        -pdf-frame-content: page-header;
+                        margin-top: 0cm;
+                        margin-right: 0.7cm;                        
+                        margin-left: 1cm;
+                        margin-bottom: 0.7cm;
+                        height: 2cm;                      
+                    }
+         }
+td {
+  
+  vertical-align: middle;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  line-height: 12px;
+}
+
+
+.titulo {
+	font-weight: bold;
+  font-size: 13px;
+	background-color: #CCCCCC;
+  line-height: 12px;
+  text-align: center;
+  vertical-align: middle;
+
+}
+.datos {
+  font-weight: bold;
+  font-size: 14px;
+}
+.listado {
+	list-style-type: none;
+	vertical-align: top;
+	font-size: 11px;
+}
+
+
+.Estilo1 {
+	font-weight: bold;
+	text-align: center;
+	font-size: 36px;
+}
+.Estilo2 {
+	font-size: 60px;
+	font-weight: bold;
+	vertical-align: middle;
+	background-color: #CCCCCC;
+	padding-top: 10px;
+}
+.listado ul {
+	list-style-type: none;
+}
+
+</style>
+</head>
+
+<body>
+<table width="100%" cellpadding="2" cellspacing="2"  >
+  
+  <tr>
+    <td width="30%"></td>
+    <td width="45%"></td>
+    <td width="25%"></td>
+  </tr>
+  <tr>
+    <td colspan="2" class="datos"><div align="center" class="Estilo1">{{examen.paciente.nombre|capfirst}}</div></td>
+    <td rowspan="5"><div align="center"> 
+      <table valign="middle" width="100%" border="0.5" align="center">
+        <tr>
+          <td align="center" valign="middle"  class="Estilo2">{% if examen.ojo > 0 %} OI {% else %} OD {% endif %} <p class="titulo">{{examen.get_ojo_display|upper}} </p></td>
+        </tr>
+       
+      </table>
+    </div></td>
+  </tr>
+  
+  <tr>
+    <td class="datos"><div align="right">Sexo:</div></td>
+    <td class="datos">{{examen.paciente.get_sexo_display|default_if_none:"---"|upper}}</td>
+  </tr>
+  <tr>
+    <td class="datos"><div align="right">Edad:</div></td>
+    <td class="datos">{{examen.paciente.edad|default_if_none:"---"|upper}}</td>
+  </tr>
+  <tr>
+    <td height="19" class="datos"><div align="right">Documento:</div></td>
+    <td class="datos">{{examen.paciente.nrodocu|default_if_none:"---"|upper}}</td>
+  </tr>
+  <tr>
+    <td class="datos"><div align="right">Obra/s Social/es:</div></td>
+    <td class="datos">{{examen.paciente.os|default_if_none:"---"|upper}}</td>
+  </tr>
+</table>
+<br>
+<table width="100%" cellpadding="2" cellspacing="2" border="0.5"  > 
+  
+  <tr>
+    <td class="titulo borde" width="30%">Historia Médica</td>
+    <td colspan="2" class="titulo borde">Medicaciones</td>
+    <td class="titulo borde" width="30%">Ocupación/Hobbies</td>
+  </tr>
+  <tr>
+    <td class="listado borde"><ul>
+      {% if examen.paciente.HM_EC %}<li>Enfermedad Cardíaca</li>{% endif %}
+      {% if examen.paciente.HM_HTA %}<li>Hipertensión Arterial</li>{% endif %}
+      {% if examen.paciente.HM_DBT %}<li>Diabetes</li>{% endif %}
+      {% if examen.paciente.HM_ET %}<li>Enfermedad Tiroidea</li>{% endif %}     
+      {% if examen.paciente.HM_EPOC %}<li>Enfermedad Pulmonar Crónica</li>{% endif %}
+      
+    </ul></td>
+    <td colspan="2" class="listado borde"><ul>
+      {% if examen.paciente.MEDICAC_AAS %}<li>Aspirina / Aspirineta</li>{% endif %}
+      {% if examen.paciente.MEDICAC_ACOAG %}<li>Anticoagulantes Orales</li>{% endif %}
+      {% if examen.paciente.MEDICAC_ABLOQ %}<li>Antiprostáticos</li>{% endif %}
+      {% if examen.paciente.TOMA_AAS_ACOAG %}<li>Cesó toma de AAS y/o ACOAG</li>{% endif %}          
+    </ul></td>
+    <td class="listado borde"><ul>      
+      {% if examen.paciente.get_OC_LF_LPF_display %}<li>{{examen.paciente.get_OC_LF_LPF_display}}</li>{% endif %}
+      {% if examen.paciente.OC_PC %}<li>Trabaja con PC</li>{% endif %}
+      {% if examen.paciente.OC_MAN %}<li>Maneja de Noche</li>{% endif %}      
+    </ul></td>
+  </tr>
+  <tr>
+    <td class="titulo">Exámen General</td>
+    <td colspan="2" class="titulo">Historia Ocular Previa</td>
+    <td class="titulo">Observaciones</td>
+  </tr>
+  <tr>
+    <td class="listado"><ul>
+      {% if examen.ANESTESIA > 0 %}<li>Anestesia {{examen.get_ANESTESIA_display}}</li>{% endif %}
+      {% if examen.get_CLEARANCE_display %}<li>Clearance Medicamentoso: {{examen.get_CLEARANCE_display}}</li>{% endif %}
+      {% if examen.MEDICAM_APTO %}<li>Medicamente Apto</li>{% endif %}
+      {% if examen.paciente.ALERGIAS %}<li>Alergias: {{examen.paciente.ALERGIAS}}</li>{% endif %}     
+    
+    </ul></td>
+    <td colspan="2" class="listado"><ul>
+      {% if examen.HO_AMBL %}<li>Ambliopía</li>{% endif %}
+      {% if examen.HO_DIPL %}<li>Diplopía</li>{% endif %}
+      {% if examen.HO_ECTA %}<li>Ectasia</li>{% endif %}
+      {% if examen.HO_CX_REFRACTIVA > 0 %}<li>Cirugía Refractiva Previa: {{examen.get_HO_CX_REFRACTIVA_display}} </li>{% endif %}          
+      {% if examen.TRATAM_GOTAS > 0 %}<li>Tratamiento con Gotas: {{examen.get_TRATAM_GOTAS_display}} </li>{% endif %}          
+                
+    </ul></td>
+    <td class="listado"><ul>    
+    {% if examen.paciente.HM_OTRAS %}<li>{{examen.paciente.HM_OTRAS}}</li>{% endif %} 
+    {% if examen.OTRAS_GOTAS %}<li>{{examen.OTRAS_GOTAS}} </li>{% endif %}
+    </ul></td>
+  </tr>
+  <tr>
+    <td colspan="4" class="titulo">Exámen Ocular</td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <table width="100%">
+        <tr>
+          <td width="50%" colspan="2" class="listado">
+          <ul>            
+            {% if examen.get_AVMCL_display %}
+            <li>Agudeza visual mejor corregida de Lejos: {{examen.get_AVMCL_display|default_if_none:"---"}}  D  </li>
+            {% endif %}
+            {% if examen.get_AVMCC_display %}
+            <li>Agudeza visual mejor corregida de Cerca: {{examen.get_AVMCC_display|default_if_none:"---"}}  J  </li>            
+            {% endif %}
+            {% if examen.get_AVCE_display %}
+            <li>Agudeza visual con Estenopeico: {{examen.get_AVCE_display|default_if_none:"---"}}  D  </li>
+            {% endif %}
+            {% if examen.PIO %}
+            <li>Presión Intraocular: {{examen.PIO}}  mmHg  </li>
+            {% endif %}
+            {% if examen.get_EO_OPACC_display %}
+            <li>Opacidad Corneal: {{examen.get_EO_OPACC_display}}</li>
+            {% endif %}
+            {% if examen.EO_GUTATTA > 0 %}
+            <li>Córnea Gutatta: {{examen.get_EO_GUTATTA_display}}</li>
+            {% endif %}
+            {% if examen.get_EO_RPUPIL_display %}
+            <li>Reflejo Rojo Pupilar: {{examen.get_EO_RPUPIL_display}}</li>
+            {% endif %}
+            {% if examen.get_PCA_display %}
+            <li>Profundidad Cámara Anterior: {{examen.get_PCA_display|default_if_none:"---"}}{% if examen.PCA_MM %} {{examen.PCA_MM|default_if_none:"" }}  mm  {% endif %}</li>
+            {% endif %}
+            <li>Cápsula Anterior: {{examen.get_EO_CAPSULA_display}}</li>
+            {% if examen.CAT_N > 0 %}
+            <li>Catarata Nuclear: {{examen.get_CAT_N_display}}  D  </li>
+            {% endif %}
+            {% if examen.CAT_C > 0 %}
+            <li>Catarata Nuclear: {{examen.get_CAT_C_display}}  D  </li>
+            {% endif %}
+            {% if examen.CAT_P > 0 %}
+            <li>Catarata Nuclear: {{examen.get_CAT_P_display}}  D  </li>
+            {% endif %}
+            Cooperación Paciente: {{examen.get_EO_COOP_display}}
+
+            {% if examen.EO_CAT_HM %} <li>Hipermadura</li>
+
+            {% endif %} {% if examen.EO_CAT_B %} <li>Brunescente</li>
+
+            {% endif %} {% if examen.EO_CAT_R %} <li>Rubra</li>
+
+            {% endif %} {% if examen.EO_CAT_N %} <li>Negra</li>
+
+            {% endif %} {% if examen.EO_CAT_TX %} <li>Traumática</li>
+
+            {% endif %} 
+            {% if examen.EO_CAT_MO %} <li>Morgagniana</li>
+
+            {% endif %} {% if examen.EO_CAT_I %} <li>Intumescente</li>
+
+            {% endif %} 
+          </ul></td>
+          <td width="50%" colspan="2" class="listado">
+          <ul>
+            {% if examen.EO_CAT_PP %} <li>Polar Posterior</li>
+
+            {% endif %} 
+            {% if examen.EO_PROM %} <li>Prominencia Frontal/Enoftalmos</li>
+
+            {% endif %} {% if examen.EO_BLEFA %} <li>Blefaritis</li>
+
+            {% endif %} 
+            <li>Hendidura Palpebral: {{examen.get_EO_ENDID_display}}</li>            
+              <li>Dilatación Pupilar: {{examen.get_EO_DILATP_display}} </li>
+            {% if examen.get_EO_AVP_display %}
+                <li>Agudeza visual Potencial (PAM/LOTMAR): {{examen.get_EO_AVP_display}}</li>
+            {% endif %}
+            {% if examen.EO_TINC %}
+                <li>Tinción con Azul Tripán</li>
+            {% endif %}
+            {% if examen.get_EO_PELICULA_display %}
+              <li>Película Lagrimal: {{examen.get_EO_PELICULA_display}}</li>
+            {% endif %}
+            {% if examen.get_OJO_SECO_display %}
+              <li>Grado Severidad Ojo Seco: {{examen.get_OJO_SECO_display}}</li>            
+            {% endif %}
+            {% if examen.get_EO_IRID_display %}
+              <li>Configuración Iridiana: {{examen.get_EO_IRID_display}}</li>
+            {% endif %}
+            {% if examen.get_EO_SINEQUIAS_display %}
+              <li>Sinequias Posteriores: {{examen.get_EO_SINEQUIAS_display}}</li>            
+            {% endif %}
+            {% if examen.EO_PSEUDO %}
+                <li>Pseudoexfoliación</li>
+            {% endif %}            
+            {% if examen.get_EO_ZONULAS_display %}
+              <li>Zónulas: {{examen.get_EO_ZONULAS_display}}</li>
+            {% endif %}
+            {% if examen.get_EO_VITREO_display %}
+              <li>Vítreo: {{examen.get_EO_VITREO_display}}</li>            
+            {% endif %}
+            {% if examen.get_EO_RETINA_display %}
+              <li>Retina: {{examen.get_EO_RETINA_display}}</li>
+            {% endif %}
+            {% if examen.EO_ECO %}
+                <li>Necesita ECO</li>
+            {% endif %}            
+            {% if examen.EO_RET_DIAB %}
+              <li>Retinapatía Diabética</li>
+            {% endif %}
+            {% if examen.EO_PAP_GLAU %}
+                <li>Papila Glaucomatosa</li>
+            {% endif %}            
+            {% if examen.EO_DEG_SENIL %}
+              <li>Degeneración Macular Senil/Tóxica</li>
+            {% endif %}
+            {% if examen.EO_CIC_MAC %}
+              <li>Cicatriz Macular/MER</li>
+            {% endif %}
+            </ul>          </td>        
+        </tr>
+      </table>    </td>
+  </tr>
+  
+  <tr>
+    <td class="titulo">Refracción Preoperatoria</td>
+    <td colspan="2" class="titulo">Queratometría</td>
+    <td class="titulo">Poder del LenteIntraOcular </td>
+  </tr>
+  <tr>
+    <td class="listado"><ul>
+      {% if examen.RP_E  %}<li>Esfera: {{examen.RP_E}} D</li>{% endif %}
+      {% if examen.RP_C  %}<li>Cilindro: {{examen.RP_C}} D</li>{% endif %}
+      {% if examen.RP_EJE  %}<li>Eje: {{examen.RP_EJE}} º</li>{% endif %}        
+    </ul></td>
+    <td width="20%" class="listado"><ul>
+      {% if examen.QUERA_AK1_1 > 0 %}
+      <li style="text-decoration:underlined;">Automática</li>
+      <li>K1: {{examen.QUERA_AK1_1|default_if_none:"---"}} x {{examen.QUERA_AK1_2|default_if_none:"---"}} º</li>{% endif %}
+      {% if examen.QUERA_AK2_1 > 0 %}<li>K2: {{examen.QUERA_AK2_1|default_if_none:"---"}} x {{examen.QUERA_AK2_2|default_if_none:"---"}} º </li>{% endif %}
+                     
+    </ul></td>
+    <td width="20%" class="listado"><ul>
+      {% if examen.QUERA_TK1_1 > 0 %}
+      <li style="text-decoration:underlined;">Topográfica</li>
+      <li>K1: {{examen.QUERA_TK1_1|default_if_none:"---"}} x {{examen.QUERA_TK1_2|default_if_none:"---"}}  º  </li>{% endif %}
+      {% if examen.QUERA_TK2_1 > 0 %}<li>K2: {{examen.QUERA_TK2_1|default_if_none:"---"}} x {{examen.QUERA_TK2_2|default_if_none:"---"}} º </li>{% endif %} 
+    </ul></td>
+    <td class="listado"><ul>
+      {% if examen.LIO_E > 0 %}<li>Esfera: {{examen.LIO_E}}  D  </li>{% endif %}
+      {% if examen.LIO_C > 0 %}<li>Cilindro: {{examen.LIO_C}}  D  </li>{% endif %}
+      {% if examen.LIO_EJE > 0 %}<li>Eje: {{examen.LIO_EJE}}  º  </li>{% endif %}
+      {% if examen.CRISTALINO  %}<li>Grosor del Cristalino:: {{examen.CRISTALINO}}  mm  </li>{% endif %}                
+    </ul></td>
+  </tr>
+
+  <tr>
+    <td class="titulo">Pupilometría</td>
+    <td colspan="2" class="titulo">Sitio de la Incisión</td>
+    <td class="titulo">Fórmulas</td>
+  </tr>
+  <tr>
+     <td class="listado"><ul>
+      {% if examen.PUPI_ESCO > 0 %}<li>Escotópica: {{examen.PUPI_ESCO}}  mm  </li>{% endif %}
+      {% if examen.PUPI_FOTO > 0 %}<li>Fotópica: {{examen.PUPI_FOTO}}  mm  </li>{% endif %}
+      {% if examen.PUPI_MESO > 0 %}<li>Mesotópica: {{examen.PUPI_MESO}}  mm  </li>{% endif %}
+      {% if examen.ASFERICIDAD  %}<li>Asfericidad Corneal(Q): {{examen.ASFERICIDAD}}  mm  </li>{% endif %}                
+    </ul></td>
+
+    <td colspan="2" class="listado"><ul>
+      {% if examen.INCIS > 0 %}<li>Sitio Incisión: {{examen.INCIS}}  º  </li>{% endif %}
+      {% if examen.get_TIPO_I_display %} <li>Tratam.Astig c/Incis.: {{examen.get_TIPO_I_display}}</li> {% endif %}
+      {% if examen.get_TIPO_INCIS_display %}  <li>Tipo: {{examen.get_TIPO_INCIS_display}}</li>{% endif %}
+      {% if examen.INCIS_TAM > 0 %}<li>Tamaño: {{examen.INCIS_TAM}}  mm  </li>{% endif %}
+      {% if examen.INCIS_E1 > 0 %}<li>Eje 1: {{examen.INCIS_E1}}  º  </li>{% endif %}
+      {% if examen.INCIS_E2 > 0 %}<li>Eje 2: {{examen.INCIS_E2}}  º  </li>{% endif %}
+    </ul></td>
+    <td class="listado"><ul>
+      {% if examen.get_ABERROM_display %}<li>Aberrometría: {{examen.get_ABERROM_display}}  mm  </li>{% endif %}
+      {% if examen.LAX > 0 %}<li>Longitud Axial: {{examen.LAX}}  mm  </li>{% endif %}
+      {% if examen.PAQ > 0 %}<li>Paquimetría Corneal: {{examen.PAQ}}  µm  </li>{% endif %}        
+      {% if examen.get_REC_ENDO_display %}<li>Recuento Endotelial: {{examen.get_REC_ENDO_display}}</li>{% endif %}
+      <li>Fórmula a Utilizar: {{examen.get_TIPO_FORMULA_display}}</li>
+      {% if examen.get_CTE_A_display %}<li>Cte.A Lente Intraocular: {{examen.get_CTE_A_display}}</li>{% endif %}
+    </ul></td>
+  </tr>
+  <tr>
+    <td colspan="4" class="titulo">Lecturas GALILEI®</td>
+  </tr>
+  <tr>
+     <td width="50%" colspan="2" class="listado">
+      <ul>
+      {% if examen.GAL_ABERR_ESF >= 0 %}<li>Aberración Esférica (SA): {{examen.get_GAL_ABERR_ESF_display}}  mm  </li>{% endif %}
+      {% if examen.GAL_ASF >= 0 %}<li>Asfericidad (Q): {{examen.get_GAL_ASF_display}}</li>{% endif %}
+      {% if examen.GAL_EXCENTRICIDAD >= 0 %}<li>Excentricidad (e²): {{examen.get_GAL_EXCENTRICIDAD_display}}</li>{% endif %}
+      {% if examen.GAL_COMA_CORNEAL >= 0  %}<li>Coma Total Corneal: {{examen.get_GAL_COMA_CORNEAL_display}}  μm  </li>{% endif %}                
+      </ul>
+    </td>
+    <td width="50%" colspan="2" class="listado">
+      <ul>
+      {% if examen.GAL_TREFOIL >= 0 %}<li>Trefoil: {{examen.get_GAL_TREFOIL_display}}  μm  </li>{% endif %}
+      {% if examen.GAL_QUATREFOIL >= 0 %}<li>Quatrefoil: {{examen.get_GAL_QUATREFOIL_display}}  μm  </li>{% endif %}
+      {% if examen.GAL_ABERRACIONES >= 0 %}<li>Aberraciones de 5º orden: {{examen.get_GAL_ABERRACIONES_display}}  μm  </li>{% endif %}
+      {% if examen.GAL_DIST_KAPPA >= 0  %}<li>Distancia Kappa: {{examen.get_GAL_DIST_KAPPA_display}}  mm  </li>{% endif %}                
+      </ul>
+    </td>
+
+   
+  </tr>
+  
+
+  <tr>
+    <td colspan="4" class="titulo">Observaciones Generales</td>
+  </tr>
+  <tr>
+    <td colspan="4">{{examen.OBSERVACIONES}}</td>
+  </tr>
+</table>
+<div id="page-footer">
+  <span bordercolor="#000000" style="border-top:1px;">CataMaster - {{fecha|date:'d/m/Y'}}</span>
+</div>
+</body>
+</html>

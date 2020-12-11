@@ -1,0 +1,455 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+<style type="text/css">
+
+td {
+	text-indent: 5px;
+}
+.titulo {
+	font-weight: bold;
+	text-decoration: underline;
+}
+.datos {
+	font-weight: bold;
+}
+
+</style>
+</head>
+
+<body>
+<table border="" cellpadding="0" cellspacing="0" bordercolor="#000000">
+  <tr height="22">
+    <td height="22" class="titulo"><div align="right">Información del Paciente</div></td>
+    <td height="22"></td>
+    <td colspan="2" nowrap="nowrap" class="titulo">Historia Médica</td>
+    <td nowrap="nowrap" class="titulo">&nbsp;</td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Nombre:</div></td>
+    <td height="22" class="datos">{{examen.paciente.nombre}}</td>
+    <td height="22" nowrap="nowrap"><div align="right">Enfermedad Cardíaca:</div></td>
+    <td height="22" nowrap="nowrap" class="datos">{{examen.paciente.HM_EC|yesno:"Si,No,No" }}</td>
+    <td height="22" class="datos">&nbsp;</td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Dirección:</div></td>
+    <td height="22" class="datos">{{examen.paciente.direccion|default_if_none:"---"}}</td>
+    <td height="22" nowrap="nowrap"><div align="right">Hipertensión Arterial:</div></td>
+    <td height="22" nowrap="nowrap" class="datos">{{examen.paciente.HM_HTA|yesno:"Si,No,No"}}</td>
+    <td height="22" class="datos">&nbsp;</td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Teléfonos:</div></td>
+    <td height="22" class="datos">{{examen.paciente.telefonos|default_if_none:"---"}}</td>
+    <td height="22" nowrap="nowrap"><div align="right">Diabetes:</div></td>
+    <td height="22" nowrap="nowrap" class="datos">{{examen.paciente.HM_DBT|yesno:"Si,No,No"}}</td>
+    <td height="22" class="datos">&nbsp;</td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Obra Social</div></td>
+    <td height="22" class="datos">{{examen.paciente.os|default_if_none:"---"}}</td>
+    <td height="22" nowrap="nowrap"><div align="right">Enfermedad Tiroidea:</div></td>
+    <td height="22" nowrap="nowrap" class="datos">{{examen.paciente.HM_ET|yesno:"Si,No,No"}}</td>
+    <td height="22" class="datos">&nbsp;</td>
+  </tr>
+  <tr height="24">
+    <td height="24" nowrap="nowrap"><div align="right">Sexo:</div></td>
+    <td class="datos">{{examen.paciente.get_sexo_display|default_if_none:"---"}}</td>
+    <td nowrap="nowrap"><div align="right">Enfermedad Pulmonar Crónica:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.paciente.HM_EPOC|yesno:"Si,No,No"}}</td>
+    <td class="datos"></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Edad:</div></td>
+    <td class="datos">{{examen.paciente.edad|default_if_none:"---"}}</td>
+    <td nowrap="nowrap" class="titulo">Medicaciones</td>
+    <td nowrap="nowrap" class="titulo">&nbsp;</td>
+    <td class="datos"></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Documento:</div></td>
+    <td class="datos">{{examen.paciente.nrodocu|default_if_none:"---"}}</td>
+    <td nowrap="nowrap"><div align="right">Aspirina / Aspirineta:</div></td>
+    <td height="22" class="datos">{{examen.paciente.MEDICAC_AAS|yesno:"Si,No,No"}}</td>
+    <td class="datos"></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Ojo:</div></td>
+    <td class="datos">{{examen.get_ojo_display|default_if_none:"---"}}</td>
+    <td nowrap="nowrap"><div align="right">Anticoagulantes Orales:</div></td>
+    <td height="22" class="datos">{{examen.paciente.MEDICAC_ACOAG|yesno:"Si,No,No"}}</td>
+    <td class="datos"></td>
+  </tr>
+  <tr height="20">
+    <td height="22" nowrap="nowrap"><div align="right"><span class="titulo">Otras Observaciones&nbsp;</span></div></td>
+    <td rowspan="2" class="datos">{{examen.paciente.HM_OTRAS|default_if_none:"---"}}</td>
+    <td nowrap="nowrap"><div align="right">Antiprostáticos:</div></td>
+    <td height="22" class="datos">{{examen.paciente.MEDICAC_ABLOQ|yesno:"Si,No,No"}}</td>
+    <td class="datos"></td>
+  </tr>
+  <tr height="20">
+    <td height="22" nowrap="nowrap"><div align="right"></div></td>
+    <td nowrap="nowrap"><div align="right">Cesó toma de AAS y/o ACOAG:</div></td>
+    <td height="22" class="datos">{{examen.paciente.TOMA_AAS_ACOAG|yesno:"Si,No,No"}}</td>
+    <td class="datos"></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap" class="titulo"><div align="right">Ocupación/Hobbies:</div></td>
+    <td height="22" nowrap="nowrap" class="datos">&nbsp;</td>
+    <td nowrap="nowrap" class="titulo">Exámen General</td>
+    <td nowrap="nowrap" class="datos"></td>
+    <td nowrap="nowrap" class="titulo">&nbsp;</td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Tipo Lector:</div></td>
+    <td class="datos">{{examen.paciente.get_OC_LF_LPF_display|default_if_none:"---"}}</td>
+    <td nowrap="nowrap"><div align="right">Anestesia:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_ANESTESIA_display}}</td>
+    <td valign="top" nowrap="nowrap" class="datos"><div align="left"></div></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Trabaja con PC:</div></td>
+    <td class="datos">{{examen.paciente.OC_PC|yesno:"Si,No,No"}}</td>
+    <td nowrap="nowrap"><div align="right">Clearance    Medicamentoso:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_CLEARANCE_display}}</td>
+    <td valign="top" nowrap="nowrap" class="datos">&nbsp;</td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Maneja de Noche:</div></td>
+    <td class="datos">{{examen.paciente.OC_MAN|yesno:"Si,No,No"}}</td>
+    <td nowrap="nowrap"><div align="right">Medicamente    Apto:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.MEDICAM_APTO|yesno:"Si,No,No"}}</td>
+    <td valign="top" nowrap="nowrap" class="datos">&nbsp;</td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right"></div></td>
+    <td class="datos"></td>
+    <td nowrap="nowrap"><div align="right">Alergias:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.paciente.ALERGIAS|default_if_none:"---"}}</td>
+    <td valign="top" nowrap="nowrap" class="datos">&nbsp;</td>
+  </tr>
+  <tr height="21">
+    <td height="21" nowrap="nowrap">&nbsp;&nbsp;
+    <div align="right"></div></td>
+    <td class="datos"></td>
+    <td nowrap="nowrap"></td>
+    <td nowrap="nowrap" class="datos"></td>
+    <td></td>
+  </tr>
+  <tr height="21">
+    <td height="21" nowrap="nowrap" class="titulo"><div align="right">Exámen Ocular</div></td>
+    <td class="datos"></td>
+    <td nowrap="nowrap"></td>
+    <td nowrap="nowrap" class="datos"></td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Agudeza visual mejor corregida de lejos:</div></td>
+    <td class="datos">{{examen.get_AVMCL_display|default_if_none:"---"}}    [D]</td>
+    <td nowrap="nowrap"><div align="right">Blefaritis:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.EO_BLEFA|yesno:"Si,No,No"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Agudeza visual mejor corregida de cerca:</div></td>
+    <td class="datos">{{examen.get_AVMCC_display|default_if_none:"---"}} [J]</td>
+    <td nowrap="nowrap"><div align="right">Hendidura Palpebral:</div></td>
+    <td class="datos">{{examen.get_EO_ENDID_display}}</td>
+    <td nowrap="nowrap" class="datos">&nbsp;</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Agudeza visual con    estenopeico:</div></td>
+    <td class="datos">{{examen.get_AVCE_display|default_if_none:"---"}} [D]</td>
+    <td nowrap="nowrap"><div align="right">Dilatación Pupilar:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_EO_DILATP_display}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Presión Intraocular:</div></td>
+    <td class="datos">{{examen.PIO|default_if_none:"---"}} [mmHg]</td>
+    <td nowrap="nowrap"><div align="right">Agudeza visual Potencial (PAM/LOTMAR):</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_EO_AVP_display|default_if_none:"---"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Opacidad Corneal:</div></td>
+    <td class="datos">{{examen.get_EO_OPACC_display|default_if_none:"---"}}</td>
+    <td nowrap="nowrap"><div align="right">Tinción con Azul Tripán:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.EO_TINC|yesno:"Si,No,No"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Córnea Gutatta:</div></td>
+    <td class="datos">{{examen.get_EO_GUTATTA_display|default_if_none:"---"}}</td>
+    <td nowrap="nowrap"><div align="right">Película Lagrimal:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_EO_PELICULA_display|default_if_none:"---"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Reflejo Rojo Pupilar:</div></td>
+    <td class="datos">{{examen.get_EO_RPUPIL_display|default_if_none:"---"}}</td>
+    <td nowrap="nowrap"><div align="right">Grado Severidad Ojo Seco:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_OJO_SECO_display|default_if_none:"---"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Profundidad Cámara Anterior:</div></td>
+    <td class="datos">{{examen.get_PCA_display|default_if_none:"---"}}    {{examen.PCA_MM }} [mm]</td>
+    <td nowrap="nowrap"><div align="right">Configuración Iridiana:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_EO_IRID_display|default_if_none:"---"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Cápsula Anterior:</div></td>
+    <td class="datos">{{examen.get_EO_CAPSULA_display|default_if_none:"---"}}</td>
+    <td nowrap="nowrap"><div align="right">Sinequias Posteriores:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_EO_SINEQUIAS_display|default_if_none:"---"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Catarata Nuclear:</div></td>
+    <td class="datos">{{examen.get_CAT_N_display|default_if_none:"---"}}    [D]</td>
+    <td nowrap="nowrap"><div align="right">Pseudoexfoliación:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.EO_PSEUDO|yesno:"Si,No,No"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Catarata Cortical:</div></td>
+    <td class="datos">{{examen.get_CAT_C_display|default_if_none:"---"}}    [D]</td>
+    <td nowrap="nowrap"><div align="right">Zónulas:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_EO_ZONULAS_display|default_if_none:"---"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Catarata Posterior:</div></td>
+    <td class="datos">{{examen.get_CAT_P_display|default_if_none:"---"}}    [D]</td>
+    <td nowrap="nowrap"><div align="right">Sinequias Posteriores:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_EO_OCT_display|default_if_none:"---"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Cooperación Paciente:</div></td>
+    <td class="datos">{{examen.get_EO_COOP_display|default_if_none:"---"}}</td>
+    <td nowrap="nowrap"><div align="right">Vítreo:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_EO_VITREO_display|default_if_none:"---"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Hipermadura:</div></td>
+    <td class="datos">{{examen.EO_CAT_HM|yesno:"Si,No,No"}}</td>
+    <td nowrap="nowrap"><div align="right">Retina:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_EO_RETINA_display|default_if_none:"---"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Brunescente:</div></td>
+    <td class="datos">{{examen.EO_CAT_B|yesno:"Si,No,No"}}</td>
+    <td nowrap="nowrap"><div align="right">Necesita ECO:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.EO_ECO|yesno:"Si,No,No"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Rubra:</div></td>
+    <td class="datos">{{examen.EO_CAT_R|yesno:"Si,No,No"}}</td>
+    <td nowrap="nowrap"><div align="right">Retinapatía Diabética:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.EO_RET_DIAB|yesno:"Si,No,No"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Negra:</div></td>
+    <td class="datos">{{examen.EO_CAT_N|yesno:"Si,No,No"}}</td>
+    <td nowrap="nowrap"><div align="right">Papila Glaucomatosa:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.EO_PAP_GLAU|yesno:"Si,No,No"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Traumática:</div></td>
+    <td class="datos">{{examen.EO_CAT_TX|yesno:"Si,No,No"}}</td>
+    <td nowrap="nowrap"><div align="right">Degeneración Macular Senil/Tóxica:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.EO_DEG_SENIL|yesno:"Si,No,No"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Morgagniana:</div></td>
+    <td class="datos">{{examen.EO_CAT_MO|yesno:"Si,No,No"}}</td>
+    <td nowrap="nowrap"><div align="right">Cicatriz Macular/MER:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.EO_CIC_MAC|yesno:"Si,No,No"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Intumescente:</div></td>
+    <td class="datos">{{examen.EO_CAT_I|yesno:"Si,No,No"}}</td>
+    <td nowrap="nowrap"><div align="right"></div></td>
+    <td nowrap="nowrap" class="datos"></td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Polar Posterior:</div></td>
+    <td class="datos">{{examen.EO_CAT_PP|yesno:"Si,No,No"}}</td>
+    <td nowrap="nowrap"><div align="right"></div></td>
+    <td nowrap="nowrap" class="datos"></td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Prominencia Frontal/Enoftalmos:</div></td>
+    <td class="datos">{{examen.EO_PROM|yesno:"Si,No,No"}}</td>
+    <td nowrap="nowrap" class="titulo"><div align="right">Queratometría Automática:</div></td>
+    <td nowrap="nowrap" class="datos"></td>
+    <td></td>
+  </tr>
+  <tr height="21">
+    <td height="21" nowrap="nowrap"><div align="right"></div></td>
+    <td class="datos"></td>
+    <td nowrap="nowrap"><div align="right">K1:</div></td>
+    <td colspan="2" nowrap="nowrap" class="datos">{{examen.QUERA_AK1_1|default_if_none:"---"}}    [D] {{examen.QUERA_AK1_2|default_if_none:"---"}} [º]</td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap" class="titulo"><div align="right">Refracción Preoperatoria</div></td>
+    <td class="datos"></td>
+    <td nowrap="nowrap"><div align="right">K2:</div></td>
+    <td colspan="2" nowrap="nowrap" class="datos">{{examen.QUERA_AK2_1|default_if_none:"---"}}    [D] {{examen.QUERA_AK2_2|default_if_none:"---"}} [º]</td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Esfera:</div></td>
+    <td class="datos">{{examen.RP_E}} [D]</td>
+    <td nowrap="nowrap"><div align="right"></div></td>
+    <td nowrap="nowrap" class="datos"></td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Cilindro:</div></td>
+    <td class="datos">{{examen.RP_C}} [D]</td>
+    <td nowrap="nowrap" class="titulo"><div align="right">Queratometría Topográfica:</div></td>
+    <td nowrap="nowrap" class="datos"></td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Eje:</div></td>
+    <td class="datos">{{examen.RP_EJE}} [º]</td>
+    <td nowrap="nowrap"><div align="right">K1:</div></td>
+    <td colspan="2" nowrap="nowrap" class="datos">{{examen.QUERA_TK1_1|default_if_none:"---"}}    [D] {{examen.QUERA_TK1_2|default_if_none:"---"}} [º]</td>
+  </tr>
+  <tr height="20">
+    <td height="20" nowrap="nowrap"><div align="right"></div></td>
+    <td class="datos"></td>
+    <td nowrap="nowrap"><div align="right">K2:</div></td>
+    <td colspan="2" nowrap="nowrap" class="datos">{{examen.QUERA_TK2_1|default_if_none:"---"}}    [D] {{examen.QUERA_TK2_2|default_if_none:"---"}} [º]</td>
+  </tr>
+  <tr height="20">
+    <td height="20" nowrap="nowrap"><div align="right"></div></td>
+    <td class="datos"></td>
+    <td nowrap="nowrap"></td>
+    <td nowrap="nowrap" class="datos"></td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap" class="titulo"><div align="right">Poder del LenteIntraOcular</div></td>
+    <td height="22" nowrap="nowrap" class="datos">&nbsp;</td>
+    <td nowrap="nowrap" class="titulo">&nbsp;
+    <div align="right">Pupilometría</div></td>
+    <td nowrap="nowrap" class="datos"></td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Esfera:</div></td>
+    <td class="datos">{{examen.LIO_E|default_if_none:"---"}} [D]</td>
+    <td nowrap="nowrap"><div align="right">Escotópica:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.PUPI_ESCO|default_if_none:"---"}} [mm]</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Cilindro:</div></td>
+    <td class="datos">{{examen.LIO_C|default_if_none:"---"}} [D]</td>
+    <td nowrap="nowrap"><div align="right">Fotópica:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.PUPI_FOTO|default_if_none:"---"}} [mm]</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Eje:</div></td>
+    <td class="datos">{{examen.LIO_E|default_if_none:"---"}} [º]</td>
+    <td nowrap="nowrap"><div align="right">Mesotópica:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.PUPI_MESO|default_if_none:"---"}} [mm]</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Grosor del Cristalino:</div></td>
+    <td class="datos">{{examen.CRISTALINO|default_if_none:"---"}} [mm]</td>
+    <td nowrap="nowrap"><div align="right">Asfericidad Corneal(Q):</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.ASFERICIDAD|default_if_none:"---"}} [mm]</td>
+    <td></td>
+  </tr>
+  <tr height="20">
+    <td height="20" nowrap="nowrap"><div align="right"></div></td>
+    <td class="datos"></td>
+    <td nowrap="nowrap"></td>
+    <td nowrap="nowrap" class="datos"></td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap" class="titulo"><div align="right">Fórmulas</div></td>
+    <td class="datos"></td>
+    <td nowrap="nowrap" class="titulo"><div align="right">Sitio de la Incisión</div></td>
+    <td nowrap="nowrap" class="datos"></td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Aberrometría:</div></td>
+    <td class="datos">{{examen.get_ABERROM_display|default_if_none:"---"}}    [mm]</td>
+    <td nowrap="nowrap"><div align="right">Sitio Incisión:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.INCIS|default_if_none:"---"}} [º]</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Longitud Axial:</div></td>
+    <td class="datos">{{examen.LAX|default_if_none:"---"}} [mm]</td>
+    <td nowrap="nowrap"><div align="right">Tratamiento Astigmatismo con Incisiones</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_TIPO_I_display|default_if_none:"---"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Paquimetría Corneal:</div></td>
+    <td class="datos">{{examen.PAQ|default_if_none:"---"}} [µm]</td>
+    <td nowrap="nowrap"><div align="right">Tipo:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.get_TIPO_INCIS_display|default_if_none:"---"}}</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Recuento Endotelial:</div></td>
+    <td class="datos">{{examen.get_REC_ENDO_display|default_if_none:"---"}}</td>
+    <td nowrap="nowrap"><div align="right">Tamaño:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.INCIS_TAM|default_if_none:"---"}} [mm]</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Fórmula a Utilizar:</div></td>
+    <td class="datos">{{examen.get_TIPO_FORMULA_display|default_if_none:"---"}}</td>
+    <td nowrap="nowrap"><div align="right">Eje 1:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.INCIS_E1|default_if_none:"---"}} [º]</td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" nowrap="nowrap"><div align="right">Cte.A Lente Intraocular:</div></td>
+    <td class="datos">{{examen.get_CTE_A_display|default_if_none:"---"}}</td>
+    <td nowrap="nowrap"><div align="right">Eje 2:</div></td>
+    <td nowrap="nowrap" class="datos">{{examen.INCIS_E2|default_if_none:"---"}} [º]</td>
+    <td></td>
+  </tr>
+  <tr height="21">
+    <td height="21" nowrap="nowrap" class="titulo">Observaciones:</td>
+    <td></td>
+    <td nowrap="nowrap"></td>
+    <td nowrap="nowrap"></td>
+    <td></td>
+  </tr>
+  <tr height="22">
+    <td height="22" colspan="3" class="datos">{{examen.OBSERVACIONES}}</td>
+    <td></td>
+  </tr>
+</table>
+
+</body>
+</html>

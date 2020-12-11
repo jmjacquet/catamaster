@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% block extra_css %}  
+  <link rel="stylesheet" href="{% static 'css/table.css' %}" type="text/css" />
+{% endblock %}
+{% block principal %}	
+	  <section  class="listados fondo section offset-header has-pattern">
+        <div class="container">
+            <div class="row">
+	            <div class="col-md-12 col-sm-12 col-xs-12"> 
+			        
+								<h1 class="text-center titulo">Listado de Exámenes</h1>
+							
+							
+							<table class="table table-hover table-striped table-condensed table-responsive datagrid">
+								<thead>
+									<tr>
+										<th>Nº</th>
+										<th>Apellido y Nombre</th>										
+										<th>Sexo</th>
+										<th>Edad</th>										
+										<th><i class="glyphicon glyphicon-eye-open iconosTabla"></i></th>
+										<th></th>
+										<th></th>
+										<th></th>
+
+									</tr>
+								</thead>
+								<tbody>
+								{% if not listado %}
+									<tr>
+										<td colspan="8"> No existen exámentes cargados.</td></tr>
+								{% else %}
+									{% for item in listado %}	
+										<tr>
+											<td>{{item.paciente.id_paciente}}</td>
+											<td>{{item.paciente.nombre|default_if_none:""}}</td>											
+											<td>{{item.paciente.get_sexo_display|default_if_none:""}}</td>
+											<td>{{item.paciente.edad|default_if_none:""}}</td>											
+											<td>{{item.get_ojo_display|default_if_none:""}}</td>
+											<td><a href="{% url 'editar_examen' item.pk %}" title="Editar Exámen"><span class=" fa fa-pencil iconosTabla"></span> </a></td>
+											<td><a  href="{% url 'ver_resultados' item.pk %}" title="Ver Resultados Exámen"><span class="fa fa-list-alt iconosTabla"></span> </a></td>
+											<td><a href="{% url 'imprimir_examen' item.pk %}" title="Imprimir Exámen" target="_blank"> <span class=" fa fa-print iconosTabla"></span></a></td>											
+										</tr>
+									{% endfor %}	
+							    {% endif %}
+								</tbody>
+							</table>
+						
+					
+				    <a  class="btn btn-theme boton pull-right" href="{% url 'nuevo_examen' %}" role="button">Nuevo Exámen</a>
+				   </div>
+			  </div>
+		
+	  	</div> 
+	 </section>
+	                   
+{% endblock principal %}
+
+
+		

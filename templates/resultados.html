@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% block extra_js %}
+   <script src="{% static 'js/jquery.colorbox.js' %}" type="text/javascript"></script> 
+{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'galeria/card.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/modals.css' %}" type="text/css" />
+{% endblock %}
+
+{% block principal %}
+<section id="promo" class="fondo section offset-header has-pattern">
+        <div class="container">
+            <div class="row">
+            <div class="col-xs-12 text-center">                  
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <span class="TituloResultados">Resultados del Paciente: <strong>{{e.paciente.nombre|default_if_none:""}} - {{e.paciente.nrodocu|default_if_none:""}} ({{e.get_ojo_display|default_if_none:""}})</strong></span>
+                    </div>
+                  </div>
+                  
+                  
+                  
+            </div>  
+            </div>
+            <div class="row">
+            <ul class="timeline resultado">
+              
+            {% for s in salida %}
+                <li id="resultado_{{forloop.counter}}" {% if forloop.counter|divisibleby:2 %}class="timeline-inverted" {% else %}{% endif %}>
+                  <div class="timeline-badge {{s.tipo}}">
+                       {% if s.ruta_img %} 
+                        <img src="{% static s.ruta_img %}"  {% if s.documentacion or s.documentacion2 %} 
+                        data-toggle="modal" data-target="#salida_{{s.codigo}}" {% endif %}
+                        alt="{{forloop.counter}}" class="img-responsive block-center img-circle">
+                       {% elif s.codigo == 71 %}
+                       LIO
+                       {% elif s.codigo == 72 and e.OBSERVACIONES %}
+                       OBS
+                       {% elif s.codigo == 75 %}
+                       GUT
+                       {% else %}
+                        {{forloop.counter}}
+                       {% endif %}
+                  </div>                  
+                  
+                  <div class="panel timeline-panel">
+                    <div class="panel-heading {{s.tipo}}">
+                      <span class="badge">{{forloop.counter}}</span> <span class="timeline-title">{{s.encabezado|safe}}</span>
+                    </div>
+                    <div class="timeline-body panel-body">
+                      <p>{{s.contenido|safe}}</p> 
+                      {% if s.codigo == 63 and e.paciente.ALERGIAS %}
+                        <p>
+                         Alergias: {{e.paciente.ALERGIAS}}
+                        </p>                      
+                      {% elif s.codigo == 71 %}
+                        <p>
+                         Esfera: {{e.LIO_E|default_if_none:''}}
+                        </p>
+                        <p>
+                         Cilindro: {{e.LIO_C|default_if_none:''}}
+                        </p>
+                        <p>
+                         Eje: {{e.LIO_EJE|default_if_none:''}}
+                        </p>
+                       {% elif s.codigo == 72 and e.OBSERVACIONES %}
+                        <p>
+                         {{e.OBSERVACIONES|default_if_none:''}}
+                        </p>                      
+                      {% endif %}
+                      {% if s.documentacion or s.documentacion2 %} 
+                      <button data-toggle="modal" data-target="#salida_{{s.codigo}}"  class="btn {{s.tipo}} btn-xs pull-right">Ver mas</button>             
+                      {% endif %}
+
+                    </div>
+                  </div>
+                </li>
+                
+            {% endfor %}  
+            </ul>
+            </div>
+          </div>
+</section>
+
+
+{% for s in salida %}
+
+  <div class="modal fade" id="salida_{{s.codigo}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document" style="overflow-y: scroll; margin-bottom:50px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {% if s.ruta_img %} 
+            <img src="{% static s.ruta_img %}" alt="{{forloop.counter}}" class="img-responsive block-center img-circle salidaModal">
+        {% endif %}
+        {{s.encabezado|safe}}
+      </div>
+      <div class="modal-body">
+        {{s.contenido|safe}}
+        {% if s.codigo == 63 and e.paciente.ALERGIAS %}
+                        <p>
+                         Alergias: {{e.paciente.ALERGIAS|default_if_none:''}}
+                        </p>
+        {% elif s.codigo == 71 %}
+                        <p>
+                         Esfera: {{e.LIO_E|default_if_none:''}}
+                        </p>
+                        <p>
+                         Cilindro: {{e.LIO_C|default_if_none:''}}
+                        </p>
+                        <p>
+                         Eje: {{e.LIO_EJE|default_if_none:''}}
+                        </p>
+         {% elif s.codigo == 72 %}
+                        <p>
+                         {{e.OBSERVACIONES|default_if_none:''}}
+                        </p>
+        {% endif %}
+        <hr>
+
+      
+      {% if s.documentacion %}          
+        {% include "modales/"|add:s.documentacion %}         
+        <hr>
+      {% endif %}
+      {% if s.documentacion2 %}          
+        {% include "modales/"|add:s.documentacion2 %}         
+        <hr>
+      {% endif %}
+      </div>
+      
+    </div>
+  </div>
+  </div>
+
+{% endfor %}
+{% endblock principal %}

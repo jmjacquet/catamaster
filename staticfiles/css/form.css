@@ -1,0 +1,64 @@
+/*######## Smart Green ########*/
+.legend2 {
+    display: block;
+    width: 100%;
+    padding: 2px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font: 'Catamaran';
+    line-height: inherit;
+    color: #333333;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.fieldset2 {
+    padding: 5px;
+    margin: 0;
+    border: 1px solid #c0c0c0;
+}
+
+.inline {
+  display:inline-block;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
+.form-horizontal .control-label {    
+    margin-bottom: 0;
+    text-align: right;
+}
+
+.form-group-sm .form-control {
+    height: 25px;
+    padding: 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    width: 100%;
+    border-radius: 3px;
+}
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    margin-top: 5px;
+    max-width:20px;
+    min-width:30%;
+}
+
+.errorlist
+{
+    list-style: none;
+    color:red;
+    font-weight: bold;
+    padding-left: 0px;
+}
+
+.cerca{
+    padding-left: 5px;
+    padding-right: 5px;
+}
